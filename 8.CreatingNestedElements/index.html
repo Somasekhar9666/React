@@ -6,13 +6,23 @@
     <title>Saying HelloWorld with React</title>
   </head>
   <body>
-    <div id="root">
-      <!----*******If you Put any childs here already before the elements comming from the App.js , they are Replaced ******-->
+    <h1>
+      Hello This is can not be replaced because i am not root to inject from
+      React
+    </h1>
+    <div id="root1">
+      <!----*******If you Put any childs here already before the elements comming from the App.js , they are Replaced(not Appended),split second you can see  that while refresing ******-->
       <h1>
-        any way i will be replaced because of the elemnts coming from App.js
+        any way i will be replaced because of the elements coming from React to
+        Replaced me
       </h1>
       <!----****The <h1> inside div#root gets replaced because when you mount React components, React will take over the root div and completely replace whatever is inside it with the elements rendered by your React components. This is part of how React manages the DOM efficiently and ensures that the UI reflects the current state of your application.-->
     </div>
+    <h1>Hello This is can not be replaced because i am not root to inject</h1>
+
+    <!-- Choosing this as a root2 to inject((Mount)) the Elements -->
+    <div id="root2"></div>
+
     <!-- Importing the React Library and React-DOM from the CDN -->
     <script
       crossorigin
@@ -23,16 +33,6 @@
       src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
     ></script>
 
-    <script>
-      //you can keep this things in Seperate JS file called App.js and link that using src attribute---->
-      const Heading = React.createElement(
-        "h1",
-        { id: "TopHeading", xyz: "abc" },
-        "Hello World From React Inside!!"
-      );
-      const root = ReactDOM.createRoot(document.getElementById("root"));
-      root.render(Heading);
-      //--------------->
-    </script>
+    <script src="App.js"></script>
   </body>
 </html>

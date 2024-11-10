@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Saying HelloWorld with React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-----Choosing this as a root to inject(Mount) the Elements-->
+
+    <!-- Importing the React Library and React-DOM from the CDN -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+
+    <script src="App.js"></script>
+    <!----- if you keep this tag above the before the CDN links it will throw the ERROR , because we are defing the React and using that in App.js so it will throw thw error -->
+  </body>
+</html>

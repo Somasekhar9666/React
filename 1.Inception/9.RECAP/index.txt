@@ -1,0 +1,11 @@
+BasiC HTML HelloWorld - with out JS
+HelloWorld with JS 
+CDN
+CROS
+Sepeare the JS IN sepeare file 
+createElement--core way to create a element with React, 
+array of child elements  to create manipulate Siblings
+*ROOT-- giving a way for react to do his Job . even at small element you can use react 
+Render()---> mounts the  React elements (JS objects) in UI
+*Render replcaes the existing elements in the root
+Top and bottom elements are not replcaed of root you choosed---*render only effects the Root not the remaing HTML

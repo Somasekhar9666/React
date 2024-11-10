@@ -1,0 +1,163 @@
+1. React.createElement()
+What is React.createElement()?
+    ->In React, React.createElement() is a method that allows you to create elements (like HTML tags) in JavaScript.
+    ->Instead of writing HTML directly in the code, React uses JavaScript to create elements that are later displayed on the webpage.
+
+
+*How Does React.createElement() Work?
+    ***->The method creates a JAVASCRIPT OBJECT that represents a React Element. Here’s the format of how it works:
+
+            React.createElement(type, props, children);
+
+                type: The type of the element you want to create (like "div", "h1", "p", or even your custom React components).
+                props: An object containing attributes for the element (like id, className, etc.).
+                children: The content inside the element (like text or other elements).
+
+
+Example:
+In React, you might want to create a <h1> tag with some text content:
+        const heading = React.createElement("h1", { id: "main-heading" }, "Hello, World!");
+        console.log(heading);
+
+    This creates a JavaScript object representing an <h1> element with the text "Hello, World!" and an id of main-heading.
+    Note: This object is not an actual DOM element yet; it’s just a representation (a virtual DOM).
+
+
+
+*Q>How Does This Compare with Regular JavaScript?
+In traditional JavaScript, you would use methods like document.createElement() to create HTML elements:
+        const heading = document.createElement("h1");
+        heading.textContent = "Hello, World!";
+        heading.id = "main-heading";
+        document.body.appendChild(heading);
+
+Difference: In React, you're working with a virtual DOM and the elements are described as JavaScript objects (using React.createElement()), whereas in regular JavaScript, you directly manipulate the actual DOM using methods like document.createElement().
+
+
+
+
+
+
+
+
+
+
+
+
+
+2. ReactDOM.createRoot()
+What is ReactDOM.createRoot()?
+    ->In React, ReactDOM.createRoot() is a method used to create a root(Path on the virtual to DOM to Inject the Component or element that you want) for your React application(Component) and attach it to a real DOM element (usually a div with an id="root").
+    ->It allows React to manage the rendering and updates of the app in a specific part of the webpage.
+
+How Does ReactDOM.createRoot() Work?
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+
+    This finds the DOM element (with id="root") in the HTML file, where you want to render your React app.
+    It prepares that DOM element to manage and render React components.
+
+
+Example:
+In an HTML file:
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>React App</title>
+  </head>
+  <body>
+    <div id="root"></div> <!-- This is where the React app will be mounted -->
+    <script src="index.js"></script> <!-- The JS file for the app -->
+  </body>
+</html>
+
+In the index.js file (React):
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+    This finds the <div id="root"></div> and sets it as the place where your React components will appear.
+
+
+
+How Does This Compare with Regular JavaScript?
+In regular JavaScript, you don’t need something like createRoot(). You directly manipulate the DOM:
+
+    const root = document.getElementById('root');
+    root.innerHTML = '<h1>Hello, World!</h1>';
+
+
+Difference: ReactDOM.createRoot() is a special function for React to manage a particular part of the DOM where React components will live. Regular JavaScript directly modifies the DOM, but React handles this dynamically through the virtual DOM and efficient updates.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3. root.render()
+What is root.render()?
+    ->In React, root.render() is used to render (or display) the React component(s) inside the root node (the div with id="root").
+    ->It takes a React element (created with React.createElement() or JSX) and renders it to the screen.
+
+
+How Does root.render() Work?
+
+        root.render(React.createElement('h1', null, 'Hello, World!'));
+    This takes the React element created by React.createElement() and displays it inside the root node.
+
+
+Example:
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(React.createElement('h1', null, 'Hello, World!'));
+
+    This creates an <h1> tag with the text "Hello, World!" and renders it inside the <div id="root"> on the page.
+
+
+How Does This Compare with Regular JavaScript?
+In regular JavaScript, you might append an element to the DOM like this:
+
+        const root = document.getElementById('root');
+        const heading = document.createElement('h1');
+        heading.textContent = 'Hello, World!';
+        root.appendChild(heading);
+
+
+
+Difference: root.render() is specific to React’s way of rendering elements. It ensures the component is correctly displayed and managed through React’s virtual DOM. In regular JavaScript, you are manually creating and appending elements to the DOM.
+
+
+
+
+
+
+
+
+
+
+
+
+Why These Are Important in React
+    ->React.createElement(): Helps React efficiently create and describe the UI. Instead of working directly with the DOM, it uses JavaScript objects to represent elements and their state.
+    ->ReactDOM.createRoot(): It marks the point in the DOM where the React app will live. This is the entry point for React to take over and manage updates.
+    ->root.render(): It takes the React component and actually displays it on the screen, managing updates efficiently with React’s virtual DOM.
+
+
+
+
+
+
+
+

@@ -1,0 +1,12 @@
+-----------------------------------------------------Igniting our App----------------------------------------------------
+In this episode, we ignite our React app development journey. We dive into the fundamentals, exploring React components, JSX, and the key concepts that power React. It's the essential foundation for creating dynamic and interactive user interfaces.
+
+Last module we have dealt with Intrduction to the REACT , how a react functoins can be used on small element in the DOM unlike a Framework.(how a react can enter into the small part of the application)
+we have a built a small Basic  Web page(APP) with basic react .
+
+As being basic is not ready to  function or not ready to push the Production . what we have made is just a Skelton(not even a skelton). 
+
+we need to add the necessary feautures to our webpage or a power to our app so that it can be pushed to Production . 
+
+so we need to ignite our app or we need to Power the app with necessary feautures  like Optimized code , Optimized images , no comments , bubdle the code , compress the files .........
+So in this module we are going to discuss about the things that can Ignite(Power , fire the app , fly the app)  our APP.

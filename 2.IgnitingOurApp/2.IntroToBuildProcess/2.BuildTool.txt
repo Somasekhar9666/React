@@ -1,0 +1,105 @@
+
+
+
+
+What is a Build Tool?
+A build tool is a software tool that automates the build process. It takes care of tasks like:
+
+                        i.Compiling/transpiling code
+
+                        ii.Bundling files
+
+                        iii.Minifying code
+
+                        iv.Optimizing images
+
+                        v.Running tests
+
+                        vi.Deploying your app
+
+
+
+
+
+*Build tools like Webpack, Parcel, Gulp, or Grunt simplify and automate these tasks, saving you time and effort.
+
+
+
+
+
+
+
+
+*QWhy do we need Build Tools?
+    The main purpose of a build tool is to make the development process easier and more efficient. Without build tools, you would have to manually:
+
+                i.Combine and optimize files
+
+                ii.Minify your code
+
+                iii.Compress images
+
+    A build tool helps you automate these tasks so you can focus on writing code rather than doing repetitive tasks.
+
+
+
+
+
+
+
+
+
+
+
+
+*****Stages in the Build Process Using a Build Tool:
+Let’s imagine you're building a small web app and using Parcel (a build tool):
+
+    1.Write Source Code: You write the index.html, app.js, and style.css files.
+
+
+    2.Install Dependencies: You run npm install to install any libraries your project needs (e.g., react, lodash).
+
+
+    3.Install Parcel with help npm :"npm install -d (development dependecy) Parcel
+
+
+    4.You "run npx parcel index.html" : Parcel Bundles and Optimizes present files:
+            Bundles your files into smaller chunks.
+    
+            Transpiles modern JavaScript (like ES6) into older, browser-compatible JavaScript.
+    
+            Minifies the JavaScript and CSS.
+            
+            Compresses images for faster load times.
+    
+    *Note: until you run this command parcel wont do any thing ..... 
+
+
+    5.Development Server: Parcel starts a development server at http://localhost:1234. You can preview your app in the browser and see changes live as you modify your code.
+    
+    
+    6.Production Build: When you’re ready to deploy, you run parcel build index.html. This creates production-ready files with minified code, optimized images, and other assets in the dist/ folder.
+    
+    
+    7.Deploy: Finally, you upload the contents of the dist/ folder to your server or a service like Netlify or Vercel.
+
+
+
+
+
+
+
+
+
+
+Conclusion:
+        In simple terms, the build process takes your raw code and prepares it for the real world by:
+
+                Bundling, compressing, and optimizing files.
+                
+                Making sure everything is ready for deployment.
+                
+                A build tool like Parcel or Webpack helps automate these steps to make it easier and faster.
+        
+        By using a build tool, you save time and improve the performance and reliability of your app, making it ready for users!

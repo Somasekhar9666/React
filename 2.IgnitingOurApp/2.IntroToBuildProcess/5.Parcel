@@ -1,0 +1,47 @@
+#parcel
+-Dev build  
+--diffrent Dev and Production bundles
+-Local server
+-HMR-Hot Module Replacement
+-File Watching Algorithm ----> written in C++
+-Caching -For faster Builds 
+-Image Optimization
+-Minification of files
+-Compress the files 
+-Consistnet HAsing 
+-Code Spliting 
+-Diffrential Bundling- to support older browsers 
+-Diagnostics 
+----****Parcel also can able to host the app in https.
+--Tree Shaking --remove un used code 
+
+
+
+--dist folder : Development and Production  builds are saved here . the Development files that are hosted in local server . 
+
+
+
+
+*-->to generate Dev and Production Builds use :
+
+                                                
+
+                                                        Dev ---        npx parcel index.html 
+
+                                                        Production---   npx parcel build index.html    (Note:while trying this command make sure that "main"(entry to project) paramter in package.json points to "index.html" or remove that "main" attribute , if don't do that it will throw the error)
+
+
+
+
+
+
+***when you generate the Production Bulilds that can be hosted on the server for customers , you will get : 
+                    1.index.html
+                    2.index.xxxxx.css
+                    3.index.xxxxx.js 
+
+
+
+
+-->your react app is speed not only beacause of the React, but also the dependecies you use , build tool you have  choosen like parcel , webpack , 
+        Bulild tool like parcel ,webpack they are Optimiinzg the app , they are Minifiying the code.

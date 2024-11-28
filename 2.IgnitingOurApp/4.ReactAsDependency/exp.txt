@@ -1,0 +1,23 @@
+******How is React treated as a dependency, even though it's a library?
+    In earlier examples, we used CDN links to include React in our projects. However, relying on CDNs is not ideal because it can result in costly network operations.
+
+    To solve this, we can install React directly into our project using npm.
+    
+    npm (Node Package Manager) is a tool for managing dependencies in a project. Once React is installed via npm, it becomes a dependency of your project. This approach is more efficient as it avoids unnecessary network requests and ensures React is readily available within the project.
+
+
+
+                so "npm install react " and "npm insatll react-dom"
+    
+
+
+*****how to bring it into your index.js:
+
+                import React from "react";
+                import React-Dom from "react-dom"
+
+
+
+            
+
+

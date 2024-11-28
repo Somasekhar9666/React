@@ -1,0 +1,121 @@
+*****Browsers always expect plain JavaScript, which means JavaScript without ES6+ features like import/export. 
+Let’s understand this with a scenario:
+    
+    Scenario: Using React with NPM
+        1.What happens when you install React and ReactDOM?
+
+            -->If you install React and ReactDOM using NPM, they are stored in the node_modules folder.
+            
+            -->To use them in your project, you need to import them into your app.js file:
+        
+                        import React from "react";
+                        import ReactDOM from "react-dom";
+
+
+        2.How does the browser react to this?
+
+            *If you reference "app.js" in your "index.html" like this:
+       
+                                <script src="app.js"></script>
+
+                    *The browser will throw an error:
+                        -->Browser scripts cannot have imports or exports.
+
+                        -->This happens because browsers cannot understand ES6+ syntax like import or export in regular scripts.
+
+
+
+**Q.Why does this happen?
+        *When you run npx parcel index.html, Parcel processes your files and hosts the output files (index.html, app.js, etc.) on a local development server.
+        
+        *However, Parcel will only transpile your source files (convert ES6+ code into plain browser-compatible JavaScript) if it knows the file needs processing.
+                            
+                            **Parcel Transpilation Behavior:
+                                    Parcel will transpile your source files into browser-understandable code (like ES5) only if:
+
+                                        1.It knows that the file needs processing.
+                                            For example, when you use import/export syntax, Parcel assumes the file is a module and should be transpiled.
+                                    
+                                    2.The file is part of the build pipeline.
+                                            If the file is referenced in an HTML <script> tag without type="module", Parcel won't process it as a module. Instead, it will serve the file as-is to the browser.
+                                            
+                                            This can lead to errors if the file contains ES6+ syntax, as most browsers can't handle import/export in plain <script> tags.
+
+ 
+        *In this case, you used a regular <script> tag, and Parcel served the raw app.js without transpiling it.
+        
+        *As a result, the browser tries to interpret the raw ES6+ code (with import/export) and throws an error because it doesn’t understand it.
+
+
+
+
+
+
+
+
+
+Solution: Use type="module:
+To fix this, you need to tell Parcel to transpile your app.js by specifying it as a module in your HTML:
+
+                        <script type="module" src="app.js"></script>
+
+
+        *Adding type="module" tells both the browser and Parcel that app.js is a JavaScript module.
+
+        *Parcel will then:
+                    1.Transpile the ES6+ code (like import/export) into plain browser-compatible JavaScript.
+                    
+                    2.Host the transpiled files on the local development server.
+
+        *Now, when the browser fetches the processed app.js, it can understand the code without any issues.
+
+
+
+
+
+
+
+
+
+
+
+Improved Use Case
+    1.You have an app.js that uses ES6 imports to bring in React and ReactDOM:
+    
+                    import React from "react";
+
+                    import ReactDOM from "react-dom";
+
+                    const element = React.createElement("h1", null, "Hello, React!");
+
+                    ReactDOM.render(element, document.getElementById("root"));
+
+
+
+    2.You include app.js in your index.html:
+   
+                    <div id="root"></div>
+
+                    <script type="module" src="app.js"></script>
+
+    3.Run npx parcel index.html.
+                Parcel transpiles app.js into plain JavaScript and serves it on a local development server.
+
+                The browser fetches and runs the transpiled app.js without issues.
+
+
+
+
+
+
+
+
+
+
+
+Key Takeaways
+    *Browsers cannot understand ES6 imports/exports in regular scripts.
+
+    Parcel will transpile your files only if they are marked as modules.
+
+    Use type="module" to ensure Parcel processes and transpiles the code properly, so the browser gets a plain JavaScript version it can understand.

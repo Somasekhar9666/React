@@ -1,0 +1,155 @@
+Topics : Dev and Production Build Generation using npx
+
+
+
+
+****Q.what is npx , what is its puprose ,  what is the diffrence b/w the npm and npx , how npx can execute the whole dependency , explain it with a very good usecase to understand very clearly?
+
+
+    npx is a command-line utility that comes with npm (Node Package Manager). Its main purpose is to allow you to execute Node.js binaries (command-line tools) and packages without installing them globally. It’s a very convenient way to run a command from a package that’s installed locally in your project or even from the npm registry.
+
+                Q**.>how the commands are treated as binaries , why exactly , give me simple usecase ? 
+                        Commands in an operating system (like ls, cd, grep, mkdir on Linux or macOS, or dir, copy, del on Windows) are often treated as binaries because they are compiled into executable machine code that the operating system can directly run.
+
+                            Q.Why Commands Are Treated as Binaries:
+                                    *Efficiency: Compiling commands into binaries allows them to be executed quickly by the operating system. The binary format is optimized for the processor, making the execution faster and more efficient than processing text-based scripts every time a command is run.
+
+                                    *Platform-Specific Execution: Binary commands are tailored for specific operating systems and hardware. For example, a command like ls on Linux is a binary that interacts with the Linux kernel, but the same command would not work on Windows without being recompiled for that platform.
+
+                                    *No Need for Interpretation: Unlike scripts (e.g., shell scripts, Python scripts), which need to be interpreted by an interpreter at runtime, a binary is already in the format that the CPU can execute directly. This makes binaries more efficient in execution since there’s no need to parse or interpret the instructions line by line.
+
+
+
+                            Simple Use Case:
+                                    Let's take the example of the command ls in Linux, which lists the contents of a directory.
+
+                                        *Command as a Binary: When you type ls in a terminal, the system looks for an executable binary file called ls (usually located in /bin/ls or /usr/bin/ls). This binary is already compiled and ready to be executed.
+                                        
+                                        *Execution Process:
+                                            When you run ls, the operating system loads the binary into memory.
+
+                                            The CPU executes the binary, which is essentially a set of machine instructions that interact with the operating system to fetch the contents of the current directory and display them on your screen.
+                                        
+                                        *The binary file for ls was compiled from the source code (likely written in C) into machine code that the CPU can understand. This allows you to use the command without the system needing to interpret it each time.
+                            
+
+                            **Another Example: grep
+                                    The grep command (which searches text in files) is also a binary. When you run grep, the operating system loads the grep binary, executes it, and performs the search efficiently using the compiled machine code.
+                                
+                            
+                            In summary, commands are treated as binaries because they are precompiled programs that can be executed directly by the computer, ensuring fast, efficient, and platform-specific execution without the need for an interpreter.
+
+
+
+
+
+
+    Purpose of npx:
+        1.Execute Packages Without Global Installation: You don’t need to globally install a package to use it. Just use npx to execute it.
+
+        2.Run Local Dependencies: If you have a package installed locally (within your project), you can run it using npx, without having to refer to it with the full path.
+        
+        3.Run One-time Commands: You can execute commands from packages that you don’t want to permanently install in your project or globally on your machine.
+    
+
+
+    What is the difference between npm and npx?
+        P1
+    
+
+
+    *How npx Executes a Whole Dependency?
+        When you use npx, it does the following:
+
+            1.Searches for the Package: If the package is already installed locally in the project (in the node_modules folder), npx will use the local version of the package.
+            
+            2.Downloads from npm if Not Installed: If the package is not installed locally or globally, npx will temporarily download and run the package from the npm registry (without installing it permanently).
+            
+            3.Executes the Command: It will then run the command associated with the package (for example, starting a server, bundling files, etc.).
+        
+    
+
+
+
+
+
+    Use Case for npx:
+        Let's go through a real-world use case to understand how npx works clearly.
+
+        **Scenario: You Want to Use Parcel Without Installing It Globally
+            1.You want to bundle your code using Parcel, but you don’t want to install Parcel globally on your system because it’s a one-time task for your project.
+
+            2.Normally, to run a bundler like Parcel, you would first need to install it globally with npm:
+
+                    npm install -g parcel
+
+                After this, you could run Parcel commands anywhere on your system. But installing globally can clutter your system if you only need a tool for one specific project.
+
+            3.Instead, using npx, you can run Parcel directly without installing it globally. You can execute the Parcel command like this:
+           
+                 npx parcel index.html
+
+            Here's what happens behind the scenes:
+                    npx checks if Parcel is installed locally (in the node_modules folder of your project). If it is, npx runs it directly.
+                    
+                    If Parcel isn’t installed locally, npx will temporarily download it from the npm registry and execute the command (but it won’t permanently install it).
+                    
+            4.Result: You don’t need to worry about cleaning up after yourself or installing/uninstalling global dependencies. You just run it when you need it!
+        
+
+
+    **Example Without Using npx (How to use npm):
+        1.If you didn’t use npx, you would first install Parcel globally:
+        
+            npm install -g parcel
+        
+        2.Then, you can run Parcel commands anywhere on your system, e.g.:
+       
+                parcel index.html
+
+        This will always run the global version of Parcel, but the downside is that you now have to manage that global installation.
+
+    
+
+
+
+
+
+
+
+
+
+
+*-->to generate Dev and Production Builds use :
+
+                                                just say you installed Parcel Build Dependecy:
+
+                                                        Dev ---        npx parcel index.html 
+
+                                                        Production---   npx parcel build index.html    (Note:while trying this command make sure that "main"(entry to project) paramter in package.json points to "index.html" or remove that "main" attribute , if don't do that it will throw the error)
+
+
+
+
+
+
+***when you generate the Production Bulilds that can be hosted on the server for customers , you will get : 
+                    1.index.html
+                    2.index.xxxxx.css
+                    3.index.xxxxx.js 
+
+
+
+
+
+
+
+
+Summary:
+        npm is used to install and manage packages.
+
+        *npx is used to run commands from installed packages or directly from npm, without needing to install them globally.
+        
+        
+        *npx is useful when you need to execute a command once or run a tool without installing it permanently.
+    By using npx, you save time, space, and make your development environment cleaner, while still having access to powerful tools!

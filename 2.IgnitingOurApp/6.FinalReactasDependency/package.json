@@ -1,0 +1,22 @@
+{
+  "name": "6.finalreactasdependency",
+  "version": "1.0.0",
+  "description": "bringing react as dependency without any CDN links ",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "type=\"module\""
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "parcel": "^2.13.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "process": "^0.11.10"
+  }
+}

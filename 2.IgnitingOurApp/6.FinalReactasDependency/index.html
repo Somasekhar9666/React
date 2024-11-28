@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Saying HelloWorld with React</title>
+  </head>
+  <body>
+    <h1>
+      Hello from simple Just Headings This is can not be replaced because i am
+      not root to inject fromReact
+    </h1>
+
+    <div id="root1">
+      <!----*******If you Put any childs here already before the elements comming from the App.js , they are Replaced(not Appended),split second you can see  that while refresing ******-->
+      <h1>
+        any way i will be replaced because of the elements coming from React to
+        Replaced me
+      </h1>
+      <!----****The <h1> inside div#root gets replaced because when you mount React components, React will take over the root div and completely replace whatever is inside it with the elements rendered by your React components. This is part of how React manages the DOM efficiently and ensures that the UI reflects the current state of your application.-->
+    </div>
+
+    <!-- Choosing this as a root2 to inject((Mount)) the Elements -->
+    <div id="root2"></div>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

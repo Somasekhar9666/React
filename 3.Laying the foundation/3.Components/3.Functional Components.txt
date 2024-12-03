@@ -1,0 +1,271 @@
+Basics of React components :
+
+1. What Are React Components?
+React is built around the concept of components. A component is a piece of code that represents a part of the user interface (UI). It can be thought of as a function (or class) that returns HTML-like content. Components are the building blocks of a React application.
+
+    There are two types of components:
+        Functional Components (more common today)
+        
+        Class-based Components
+
+
+
+
+2. Functional Components (the most used in modern React):
+                    A functional component is simply a JS function that returns some piece of JSX (HTML-like code in JavaScript) or returs React Element or returns JS object
+                                                        (or)
+                    functional component  is a JavaScript function that:
+
+                                                    1.Accepts an optional parameter called props (short for properties).
+                                
+                                                    2.Returns one of the following:
+                                                            JSX (JavaScript XML), which is a syntax that resembles HTML-like code in JavaScript.
+                                                            
+                                                            A React element, which represents a part of the user interface.
+                                                            
+                                                            A JavaScript object that React understands and uses to render the UI.
+
+                    Ex: in "App.js" 
+
+                        import React from "react";
+                        import ReactDOM from "react-dom";
+                          
+                        // React element 
+                        
+                        const heading=(                                                                         // *direct React Element , heading variable storing  Direct React element or direct React element object that will be rendred on UI
+                            <h1 className="head" tabIndex="5>                                                    
+                               Hello Sekhar ,this is Just a react element not react functional component 
+                            </h1>)
+                        
+
+                        //React functional component                                                    //functional component returning React Element
+                        
+                        const HeadingFun = ()=>{                                                        // *The HeadingFun variable stores a reference to the function(JS function , any way functional component is a JS function at end)
+                            <div className="container">
+                            <h1> className="heading" > Hello Sekhar this is from a functional component , not from the React element
+                            </div>
+                        }
+                    
+
+                        const root1= ReactDOM.createRoot(document.getElementById("root"))
+                        const root2= ReactDOM.createRoot(document.getElementById("root2"))
+
+                        root1.render(heading)               *********// this is the way for Renering the "React Element " 
+
+                        root2.render(<HeadingFun/>)          ******// this is how you render the "React function component" 
+
+
+
+                        React Element (heading):
+                            The heading variable directly stores the React element, which is a JavaScript object.
+                            
+                            React uses this object to know how to render <h1> in the DOM.
+                        
+                        
+                        React Functional Component (HeadingFun):
+
+                            The HeadingFun variable stores a reference to the function.
+                            
+                            When you render it with <HeadingFun />, React invokes the function and receives the React element (a JavaScript object) that it uses for rendering.
+
+
+
+
+    1. How <HeadingFun /> Renders the Functional Component
+    When you write <HeadingFun />, here’s what happens:
+
+        *1.React recognizes <HeadingFun /> as a functional component.
+            React sees the capitalized name HeadingFun and understands that it's a React component (not a regular HTML tag).
+        
+        2.React calls the function HeadingFun.
+            React invokes the function: HeadingFun().
+        
+        3.The function returns a React element.
+                Inside HeadingFun, you return this JSX:
+        
+                    return (
+                    <div className="container">
+                        <h1 className="heading">Hello Sekhar, this is from a functional component</h1>
+                    </div>
+                    );
+
+            This JSX is transpiled into a React element (a JavaScript object).
+        
+        4.React renders the returned React element.
+            The returned React element is rendered onto the DOM in the specified root element
+    
+
+
+
+
+    2. Why Use Components Instead of Direct React Elements?
+
+        While React elements can be rendered directly (like root1.render(heading)), components solve several problems and make your code more manageable. Here’s why:
+
+            a. Reusability
+                A React component can be reused across different parts of your app, avoiding code duplication.
+                Example:
+                        const Heading = ({ message }) => <h1>{message}</h1>;
+
+                        root1.render(<Heading message="Hello Sekhar" />);
+                        root2.render(<Heading message="Welcome to React" />);
+                        
+                With components, you don’t need to write separate elements for each heading.
+            
+            
+
+
+
+
+            b. Dynamic Behavior
+                    Components can accept props (data) and render elements dynamically based on those props.
+
+            Example:
+
+                    const Button = ({ label }) => <button>{label}</button>;
+                    root1.render(<Button label="Click Me" />);
+                    root2.render(<Button label="Submit" />);
+
+
+                Direct React elements like const btn = <button>Click Me</button> are static and can't dynamically adapt like this.
+            
+            
+            
+            
+
+            c. Composition
+                    Components can be composed into larger components, making it easier to build complex UIs.
+            
+            Example:
+            
+                const Header = () => <h1>My App</h1>;
+                const Footer = () => <footer>© 2024</footer>;
+                const App = () => (
+                <div>
+                    <Header />
+                    <p>Welcome to my app!</p>
+                    <Footer />
+                </div>
+                );
+
+                root1.render(<App />);
+
+            Composing elements like this with raw React elements would quickly become unmanageable.
+            
+            
+            
+            
+            
+            
+            d. State and Lifecycle (with Class Components or Hooks)
+                    Components can manage state and respond to lifecycle events.
+            
+            Example with Hooks:
+            
+                    const Counter = () => {
+                    const [count, setCount] = React.useState(0);
+                    return (
+                        <div>
+                        <p>Count: {count}</p>
+                        <button onClick={() => setCount(count + 1)}>Increment</button>
+                        </div>
+                    );
+                    };
+                root1.render(<Counter />);
+            
+            A plain React element can’t do this. You’d need to manage state manually outside React, which defeats the purpose of React’s declarative model.
+
+
+
+
+
+
+
+
+    Use Case: A Reusable Card Component
+        Instead of manually creating elements like this:
+
+       
+                    const card1 = (
+                    <div className="card">
+                        <h2>Title 1</h2>
+                        <p>Description 1</p>
+                    </div>
+                    );
+                    const card2 = (
+                    <div className="card">
+                        <h2>Title 2</h2>
+                        <p>Description 2</p>
+                    </div>
+                    );
+        
+        
+        
+        Use a reusable functional component:
+
+        
+                const Card = ({ title, description }) => (
+                <div className="card">
+                    <h2>{title}</h2>
+                    <p>{description}</p>
+                </div>
+                );
+
+        root1.render(<Card title="Title 1" description="Description 1" />);
+        root2.render(<Card title="Title 2" description="Description 2" />);
+
+
+
+
+
+
+
+
+**Q.why the first one  fails  , but why the second works fine.
+1. const Heading = () => { 
+  <h1 className="h1" tabIndex="5">
+    this heading is made of simple JSX
+  </h1>
+};
+
+2.const Heading = () => ( 
+  <h1 className="h1" tabIndex="5">
+    this heading is made of simple JSX
+  </h1>
+);
+
+
+Ans:
+const Heading = () => { 
+  <h1 className="h1" tabIndex="5">
+    this heading is made of simple JSX
+  </h1>
+};
+    In this version, you are using a block body for the function (i.e., curly braces {}). In a block body, you need to explicitly use the return statement to return JSX. Without it, the function will not return anything, which causes the failure.
+
+
+
+
+
+const Heading = () => ( 
+  <h1 className="h1" tabIndex="5">
+    this heading is made of simple JSX
+  </h1>
+);
+
+
+In this example, the arrow function uses implicit return. This means that the expression inside the parentheses () is automatically returned. You don't need the return keyword, as JSX is returned directly.
+
+
+
+
+Key Takeaways:
+    *Arrow function with expression body: Implicit return (no need to use return).
+
+    *Arrow function with block body (curly braces): Explicit return (need to use return).
+    
+    *Regular function: Always needs return when using block body.
+
+
+
+    

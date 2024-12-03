@@ -1,0 +1,324 @@
+Convention:
+        The Telugu meaning of "convention" depends on the context, but a general translation is "సంరీతి" (Samreeti) or "ఆచారం" (Aacharam).
+
+        General: A custom or tradition that people agree to follow.
+
+        Technical/Professional: An agreed-upon practice or guideline in a specific field (e.g., coding conventions, social conventions).
+
+        Meeting/Event: A large gathering of people with shared interests or goals.
+
+
+
+
+
+
+
+
+
+
+*Note: Before going to this convenstions know about "Components" in react then you will understand them easily.
+
+
+
+
+
+
+
+
+JSX convenstions: 
+JSX (JavaScript XML) conventions are best practices and syntax rules for writing clean, maintainable, and efficient JSX code. JSX is a syntax extension for JavaScript used in React to describe what the UI should look like. Here's a breakdown of the conventions, their use cases, and how they differ from regular HTML:
+
+
+    1. Single Parent Element:
+        *In JSX, every component must return a single root element to wrap all the other elements it contains. This helps JSX translate into a single JavaScript object that can be rendered into the DOM (Document Object Model).
+        Ex:
+                const MyComponent = () => {
+                return (
+                    <div>
+                    <h1>Hello, World!</h1>
+                    <p>This is a JSX example.</p>
+                    </div>
+                );
+                };
+
+            *In this case, the <div> element is the root parent element wrapping both <h1> and <p> elements.
+
+
+        Q.Why is This Important in JSX?
+            JSX is eventually converted into JavaScript code that creates React elements. React requires one root element for its rendering. "If there were multiple root elements, React wouldn’t know how to efficiently update or manage the components."
+
+        Q.How Is This Different from Normal HTML?
+            In HTML, you can have multiple root-level elements. For example:
+
+                Example of Normal HTML:
+            
+                    <h1>Hello, World!</h1>
+                    <p>This is an HTML example.</p>
+
+                You don't need to wrap these elements in a single parent element. Multiple elements can be written directly inside the body of the page.
+        
+
+        *Main usecase of this : 
+                    Q.What is wrong with this code? Why is the paragraph not rendering in the UI?
+                        
+                        
+                                const heading = (
+                                <h1 className="h1" tabIndex="5">
+                                    this heading is made of simple JSX
+                                </h1>
+                                );
+
+                                const paragraph = (
+                                <p id="p1" className="Hello">
+                                    this is a simple para with simple JSX
+                                </p>
+                                );
+
+                                const root = ReactDOM.createRoot(document.getElementById("root"));
+
+                                // Render heading and paragraph
+                                root.render(heading);
+                                root.render(paragraph);
+                    
+
+                    Ans.*The issue with the code is that you're rendering two separate elements (heading and paragraph) sequentially using root.render(). In React, when you call render() multiple times, the previous render will be replaced by the new one.
+                    So, in your case:
+                            The first root.render(heading) renders the <h1> element.
+                            The second root.render(paragraph) replaces the <h1> element with the <p> element.
+                    
+                    ***To render both the heading and the paragraph, you should wrap them in a single parent element (like a div, React.Fragment, or the shorthand <>).
+                            
+                            const root = ReactDOM.createRoot(document.getElementById("root"));
+                            // Wrap both heading and paragraph inside a parent element
+                            root.render(
+                            <div>
+                                {heading}
+                                {paragraph}
+                            </div>
+                            );
+
+                    Key Points:
+                            *You can only render one root element per render call in React, so wrap multiple elements in a parent container.
+                            Alternatively, you can use a fragment if you don't want to add an extra div:
+                           
+                                            root.render(
+                                            <>
+                                                {heading}
+                                                {paragraph}
+                                            </>
+                                            );
+                            The fragment (<>...</>) is a lightweight wrapper that doesn’t add extra nodes to the DOM.
+                                                
+
+
+
+
+    2. Use className Instead of class
+        *Convention:
+            Use className for assigning CSS classes since class is a reserved keyword in JavaScript.
+        *Use Case:
+            Avoid syntax errors and ensure proper rendering.
+                Example:
+      
+                        function App() {
+                        return <div className="container">Hello World</div>;
+                        }
+
+        *Difference from HTML:
+            HTML uses class for CSS classes, but JSX requires className.
+    
+
+
+
+
+
+    3. Self-Closing Tags
+        Convention:
+            Use self-closing tags for elements without children (e.g., <img />, <br />, <input />).
+
+        Use Case:
+            Cleaner and more consistent syntax.
+        Example:
+                    function App() {
+                    return (
+                        <div>
+                        <img src="logo.png" alt="Logo" />
+                        <br />
+                        </div>
+                    );
+                    }
+
+
+        Difference from HTML:
+                In HTML, both <img> and <img /> are valid, but JSX strictly requires self-closing for void elements.
+            
+        
+
+
+
+    4. JavaScript Expressions in Curly Braces ({})
+        Convention:
+            Use {} to embed JavaScript expressions within JSX.
+        
+        Use Case:
+            Dynamically display values, handle logic, or render conditional content.
+        
+        Example:
+        
+            function App() {
+            const name = "React";
+            return <h1>Welcome to {name}</h1>;
+            }
+
+
+        Difference from HTML:
+            HTML doesn’t support embedding JavaScript directly. You need <script> for logic.
+
+
+
+
+
+    5. CamelCase for Attributes
+            Convention:
+                Use camelCase for HTML attributes (e.g., onClick, tabIndex, defaultValue).
+            
+            Use Case:
+                Aligns with JavaScript's naming conventions and ensures compatibility with JSX.
+           
+            Example:
+                        function App() {
+                        return <button onClick={() => alert('Clicked!')}>Click Me</button>;
+                        }
+
+
+            Difference from HTML:
+                HTML uses kebab-case (e.g., onclick), while JSX uses camelCase.
+        
+
+    
+
+
+    6. Comments in JSX
+        Convention:
+            Use {/* comment */} for comments inside JSX.
+        
+        Use Case:
+            Document your JSX components without breaking the syntax.
+        
+        Example:
+        
+                function App() {
+                return (
+                    <div>
+                    {/* This is a header */}
+                    <h1>Hello World</h1>
+                    </div>
+                );
+                }
+
+        Difference from HTML:
+            HTML uses <!-- comment -->.
+
+
+
+
+
+    7. Conditional Rendering
+        Convention:
+            Use JavaScript's ternary operator or && for conditionally rendering elements.
+        
+        Use Case:
+            Dynamically show or hide elements based on a condition.
+        
+        Example:
+                
+                function App() {
+                const isLoggedIn = true;
+                return <div>{isLoggedIn ? <h1>Welcome Back</h1> : <h1>Please Log In</h1>}</div>;
+                         }
+
+        Difference from HTML:
+            HTML doesn’t support inline conditional logic; requires JavaScript in <script> or other workarounds.
+
+
+
+
+
+    8. Arrays and Loops for Lists
+        Convention:
+            Use JavaScript's .map() to render lists.
+        
+        Use Case:
+            Dynamically generate lists of elements from data.
+        Example:
+       
+                function App() {
+                const items = ['Apple', 'Banana', 'Cherry'];
+                return (
+                    <ul>
+                    {items.map((item, index) => (
+                        <li key={index}>{item}</li>
+                    ))}
+                    </ul>
+                );
+                }
+
+        Difference from HTML:
+            HTML uses static <li> elements, while JSX allows dynamic rendering.
+    
+
+
+
+    9. Key Attribute for Lists
+        Convention:
+            Always use a unique key for elements in a list.
+        
+        Use Case:
+        Helps React efficiently update and re-render lists.
+       
+        Example:
+                const items = ['Apple', 'Banana', 'Cherry'];
+                return items.map((item, index) => <li key={index}>{item}</li>);
+
+        Difference from HTML:   
+            key is specific to React's reconciliation process and has no HTML equivalent.
+
+
+
+    10. Avoid Inline Styles (If Possible)
+        Convention:
+            Use CSS or styled components instead of inline styles for maintainability.
+        
+        Use Case:
+            Makes it easier to manage and reuse styles.
+        
+        Example:
+                    function App() {
+                    const styles = { color: 'blue', fontSize: '20px' };
+                    return <h1 style={styles}>Hello World</h1>;
+                    }
+
+        Difference from HTML:
+                JSX styles are written as objects using camelCase, unlike HTML where styles are strings.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Conclusion:
+        JSX conventions simplify and enhance the development process by blending JavaScript's logic with HTML-like syntax. These conventions enforce cleaner code, prevent common errors, and introduce powerful dynamic rendering capabilities that regular HTML lacks.

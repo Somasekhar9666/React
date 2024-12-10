@@ -1,0 +1,3 @@
+We have collected data from two platforms : Zomato and Swiggy 
+
+we gonna rendeer the Restrarant cards with collected Data

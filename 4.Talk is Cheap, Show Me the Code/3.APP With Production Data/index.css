@@ -1,0 +1,102 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+
+}
+
+.logo{
+    width: 100px;
+}
+
+/* Card styling */
+.res-card {
+    width: 250px; /* Adjusted width for better look */
+    border-radius: 10px; /* Rounded corners */
+    background-color: #fff; /* White background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px;
+    margin: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover */
+    text-align: center;
+    font-family: 'Arial', sans-serif; /* Font family */
+}
+
+/* Image styling */
+.res-logo {
+    width: 100%; /* Makes the image fill the width of the card */
+    height: auto;
+    border-radius: 10px; /* Rounded corners for the image */
+    object-fit: cover; /* Ensures the image covers the space without distorting */
+    margin-bottom: 15px; /* Space between image and text */
+}
+
+/* Text styling */
+.res-card h3 {
+    font-size: 1.2rem; /* Font size for the restaurant name */
+    font-weight: bold;
+    margin-bottom: 10px; /* Space between name and other text */
+    color: #333; /* Dark text color */
+}
+
+.res-card h4 {
+    font-size: 1rem; /* Font size for the cuisine and rating */
+    color: #555; /* Slightly lighter text color */
+    margin: 5px 0; /* Small margin between h4 elements */
+}
+
+/* Hover effect */
+.res-card:hover {
+    transform: translateY(-5px); /* Lifts the card when hovered */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Darker shadow on hover */
+}
+
+/* Optional - badge style if you have any */
+.res-card .badge {
+    background-color: #28a745; /* Green badge */
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+
+
+.nav-items>ul{
+    font-size: 24px;
+    display: flex;
+    padding: 0px 20px;
+
+    list-style-type: none;
+}
+
+.nav-items>ul>li{
+    padding: 10px;
+    margin:10px ;
+
+}
+
+
+
+.res-card:hover{
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+
+.search-bar{
+    padding: 10px;
+}
+
+
+.rest-container{
+    display: flex;
+    flex-wrap: wrap;
+
+
+
+}
+
+
+

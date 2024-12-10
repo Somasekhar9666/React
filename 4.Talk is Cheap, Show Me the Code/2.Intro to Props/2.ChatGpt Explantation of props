@@ -1,0 +1,136 @@
+Props in React (Properties):
+Props (short for properties) allow us to pass dynamic data to functional components in React, making them reusable and flexible. 
+
+
+
+
+Let’s break it down step by step:
+
+1. Functional Components in React
+        A functional component in React is essentially a normal JavaScript function that returns JSX (JavaScript XML).
+
+    For example:
+
+
+                const RestaurantCard = () => {
+                return (
+                    <div className="res-card">
+                    <h3>Restaurant Name</h3>
+                    </div>
+                );
+                };
+
+        We can use this RestaurantCard component multiple times in our app to display restaurant cards.
+
+
+
+
+
+
+2. The Problem with Static Data
+    If we render the RestaurantCard component multiple times like this:
+
+            <RestaurantCard />
+            <RestaurantCard />
+            <RestaurantCard />
+    
+    Each card will display the same static data because we hardcoded the values inside the component. This defeats the purpose of reusability. We want to display different restaurant information (name, cuisine, rating, etc.) for each card dynamically.
+
+
+
+
+
+
+3. Solution: Props (Properties)
+        Props solve this problem by allowing us to pass dynamic values to functional components.
+
+            Props are like arguments you pass to a regular JavaScript function.
+            
+            They let us customize the component's behavior and appearance for each instance.
+
+
+
+
+
+4. Using Props in React
+        Step 1: Pass Props
+                    When rendering a component, you can pass data (props) as attributes like this:
+
+                            <RestaurantCard 
+                            name="Auroma Hyderabad House" 
+                            cuisines="North, South, Chinese, Japanese" 
+                            rating="4.4" 
+                            deliveryTime="30 min" 
+                            />
+                    
+
+        Step 2: Access Props Inside the Component
+                    Inside the RestaurantCard component, you can access these props using the props object:
+
+                            const RestaurantCard = (props) => {
+                            return (
+                                <div className="res-card">
+                                <img 
+                                    className="res-logo"
+                                    alt="res-logo"
+                                    src="https://via.HyderabadRes.img.com/150" 
+                                />
+                                <h3>{props.name}</h3>
+                                <h4>{props.cuisines}</h4>
+                                <h4>Rating: {props.rating}</h4>
+                                <h4>{props.deliveryTime}</h4>
+                                </div>
+                            );
+                            };
+
+
+
+
+
+5. Example: Rendering Multiple Restaurants Dynamically
+                Now, you can render multiple RestaurantCard components with different data:
+
+                        <div className="rest-container">
+                        <RestaurantCard 
+                            name="Auroma Hyderabad House" 
+                            cuisines="North, South, Chinese, Japanese" 
+                            rating="4.4" 
+                            deliveryTime="30 min" 
+                        />
+                        <RestaurantCard 
+                            name="Spice Kitchen" 
+                            cuisines="Indian, Continental" 
+                            rating="4.1" 
+                            deliveryTime="25 min" 
+                        />
+                        <RestaurantCard 
+                            name="Dragon Palace" 
+                            cuisines="Chinese, Thai" 
+                            rating="4.5" 
+                            deliveryTime="40 min" 
+                        />
+                        </div>
+
+
+
+
+
+6. Why Props are Important
+        Dynamic Rendering: Props allow us to customize components with different data, enabling dynamic rendering.
+        
+        *Reusability: Components become flexible and reusable because we can pass different data as props.
+        
+        Maintainability: Instead of hardcoding data in each component, we pass data as props, making the code easier to maintain.
+        
+    
+    
+
+
+Final Key Points
+        A functional component is just a JavaScript function.
+        
+        Props are the arguments passed to this function.
+        
+        If a component cannot handle dynamic data, it loses its primary advantage of reusability.
+        
+        Props make components dynamic and reusable by allowing them to display different data for each instance.

@@ -1,0 +1,19 @@
+Before you started coding to develop any app, just  Draw the Blueprint of app , so that it will some clarity to you how to develop that application . 
+
+*Even draw the components of the application like which component should be placed where ... 
+
+*Ex:  1.entire application is one main component (WholeApp)
+
+     2. It should have the Header component on the Top of page (Header) with some navigation options like Home , About ...
+
+     3.A logo component inside the Header (Logo)
+
+     4.A Search component (Search) after the Header.
+
+     5.Main Body the page with Reasturunt Cards inside main Card Constainer(Card_Container)
+
+     6.Inside the Card_Container , there are some Resturant Cards which are child of a parent component called (Rcard, these is reusable)
+
+     7.Afer below the Body , there will be Footer component which contians Data about Copywright , Resturant Details ...
+
+

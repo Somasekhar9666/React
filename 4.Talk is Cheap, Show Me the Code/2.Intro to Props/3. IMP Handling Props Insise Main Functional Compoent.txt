@@ -1,0 +1,242 @@
+
+                Parent : this will sends  the props to child , so  the component that uses that functional compoent like this "<xxx  />"   is Parent 
+                child : function that receives the props(arguments), so main logic with return is child.
+
+Here we going to discuss Manly two things :
+
+        1. how the props are being sent or travels from parent to child.
+
+        
+        2. How to Destructure the props  or how to receive them once they are came to child  from Parent.
+
+
+
+
+
+
+
+
+
+
+
+
+
+*******************************************************************IMP****************************************************************
+Q.How the props are being sent or travels from parent to child?
+
+Props are trasfred to child only through the "Props" object(it is a Defult name). so "Props" object it will wraps around them . 
+
+        Ex: <ResturantCard Resturant={SwiggyDataList[3]} />                 // Parent component will send the props when it wants to render the Child.
+
+
+            Here, the props object looks like this:
+
+                        {
+                            Resturant: SwiggyDataList[3]
+                        }
+        so this ojcet will  travel and reach to child.
+
+
+
+*****************************************************************************************************************************************
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------**Before Going to Destructuring of Props Know this ------------------------------------------------------------------------------
+
+                        "When destructuring from an "Props" Object, you can only extract properties that are actually present in that object. You cannot extract a "new" or non-existent key. "
+
+
+
+
+    Ex:Failure Use Case
+        Imagine we have a UserCard component. We want to display the user's name and email, and we mistakenly send the user data under an unexpected prop name (userInfo) but try to destructure it as userData inside the component.
+
+        Code with the Mistake:
+
+
+
+
+                             // UserCard Component
+                                const UserCard = (props) => {
+                                
+                                const { userData } = props;                                                 // wrote the logic to  Destructure the Props and extracting the "userData".
+
+                                
+                                        return (
+                                            <div>
+                                            <h2>{userData.name}</h2>                                  
+                                            <p>{userData.email}</p>
+                                            </div>
+                                        );
+                                };
+                
+
+
+
+                    In a Parent compoent , just Imagine we got Json data of userData form API   
+
+                                const user = {
+
+                                            name: "John Doe",
+                                            email: "john.doe@example.com",
+
+                                            };
+
+                                    
+                                <UserCard userInfo={user} />                            {/* Passing data with prop name `userInfo` */}
+                                  
+
+
+
+                    ***This above snippet will get error that "userInfo" is undefined , because 
+                    Q.Why It Fails?
+                        The props object passed to UserCard looks like this:
+
+                                    {
+                                    userInfo: { name: "John Doe", email: "john.doe@example.com" }
+                                    }
+
+
+                        However, inside the UserCard component, we are destructuring:
+
+                                        const { userData } = props;
+
+
+                    *Since there is no userData property comming in props, userData is undefined. When the component tries to access userData.name and userData.email, it throws 
+                    
+                        TypeError: Cannot read properties of undefined (reading 'name')
+
+
+                    
+        
+        *Solution: Jsut match  varibable that is used during Destructuring the porps . so the props object will correct the same varibable that will be destructured.
+
+
+            Ex:             <UserCard userData={user} /> 
+
+
+                    In Props object:
+                            {
+                                userData : { name: "John Doe", email: "john.doe@example.com" }
+                                    
+                            }
+
+                    in destructuring time it will extract what ever it is looking , so won't be any errors.
+                        
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+2.There are diffrent ways of Handling incomming props to main functional component .
+
+                    1.Basic :Using the  props Object
+                    2.Destructuring Inside the Function
+                    3.Destructuring Inline 
+                    4.on fly Destructuring
+
+
+
+
+
+
+
+
+
+
+
+1.Basic :Using the Entire props Object : the "props" key word is the Defult keyword which will accepts the incomming props.
+   so this approch gonna be the most basci to hadle the props.
+    
+
+                const ResturantCard = (props) => {
+                            console.log(props.DataList); // Access via props
+                            return <h3>{props.DataList.name}</h3>;
+                            };
+
+
+                    <ResturantCard 
+                    DataList={SwiggyDataList[0]}                         // SwiggyDataList is the real world production data that has all the details of a basic acard (in datail in next folder )
+                    />
+
+
+
+
+
+
+2. after receiving the props throug the "props" keyword , desturing it Inside the functional component
+    const ResturantCard= (props)=>{
+
+            **   const { DataList } = props;        ************
+
+                cardInfo=DataList.card.card.info
+                const imgeID=cardInfo.cloudinaryImageId
+                
+                    return (
+                        <div className="res-card" style={{backgrounfColor: "#f0f0f0"}}> {/*In line CSS */}
+                            <img 
+                            className="res-logo"
+                            alt="res-logo" 
+                            src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${imgeID}`}/>
+                            <h3 >{cardInfo.name}</h3>
+                            <h4>{(cardInfo.cuisines).join(',')}</h4>
+                            <h4>Rating{cardInfo.avgRating}</h4>
+                        </div>
+                    )
+                }
+
+
+         <ResturantCard 
+            DataList={SwiggyDataList[0]}                         
+            />
+
+
+
+
+
+
+
+
+
+
+**3.Destructuring Inline: this is no usage of any "poprs" keyword , we can directly desture the incomming props: 
+
+            const ResturantCard = ({ DataList }) => {
+
+                        console.log(DataList);                  // Directly accessible
+
+                        return <h3>{DataList.name}</h3>;
+                        };
+
+
+
+            <ResturantCard 
+            DataList={SwiggyDataList[0]}                         
+            />
+
+
+
+
+
+
+
+
+
+
+

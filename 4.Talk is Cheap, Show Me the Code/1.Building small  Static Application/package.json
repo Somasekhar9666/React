@@ -1,0 +1,23 @@
+{
+  "name": "1.building-small-app",
+  "version": "1.0.0",
+  "description": "\"A simple resturent app with functional component basics\"",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "\"functionl",
+    "components\""
+  ],
+  "author": "Somasekhar",
+  "license": "ISC",
+  "dependencies": {
+    "parcel": "^2.13.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "process": "^0.11.10"
+  }
+}

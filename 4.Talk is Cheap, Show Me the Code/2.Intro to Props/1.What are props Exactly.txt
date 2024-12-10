@@ -1,0 +1,181 @@
+                    //Main Functional Component
+                    const ResturantCard= ()=>{
+                        return (
+                            <div className="res-card"> 
+
+                                <img 
+                                className="res-logo"
+                                alt="res-logo" 
+                                src="https://via.HydrabadRes.img.com/150"
+                                />
+
+                                <h3 style={{padding:"0px 2px" }}>Auroma Hydrabad House</h3>
+
+                                <h4>Norath,South,Chinese,Japanese</h4>
+
+                                <h4>Rating:4.4</h4>
+
+                                <h4>30 min</h4>
+                            </div>
+                        )
+                    }
+
+
+
+
+
+
+
+
+            <div className="rest-container">
+                <ResturantCard/>     {/*Rendering Restrarant 1*/}
+                <ResturantCard/>      {/*Rendering Restrarant 2*/}                 // Reusability property of functional Component
+                <ResturantCard/>      {/*Rendering Restrarant 3*/}
+                <ResturantCard/>      {/*Rendering Restrarant 4*/}
+                <ResturantCard/>      {/*Rendering Restrarant 5*/}
+                <ResturantCard/>
+                <ResturantCard/>
+                <ResturantCard/>
+                <ResturantCard/>
+            </div>
+
+
+
+*We are able to use the "ResturantCard(a functional Component)" multiple times how ever we want  but , IN the above example  we are only able to render only single resturant data (Auroma Hydrabad House) . but  we  must be able to render the multiple Restrarants.
+
+*we can able to render(<ResturantCard/>) the ResturantCard multiple times but always with same values, so single resturant displaed each time. so we have to pass the diffrent data (or) data we want during rendaring(<ResturantCard/>).
+
+*We can able to aechive that by sending  the data what ever we want(Dynamic data) to main functional Component(ResturantCard), so that it can be rendered(<ResturantCard/>) Dynamically .
+
+Here comes the Props.
+
+
+
+
+
+**********************************************************************************************************************************************************************************************************************************************************************************
+Props(Properties):
+  what are functional Component? 
+    Functional Component is just a "Noraml  JavaScript Function"
+
+  **Simiraly Props (or) Properties are  just "The 'Arguments' that are being passed to a JavaScript Function(Functional Component)". 
+
+            **so we Render(like calling the function(<ResturantCard/>))  by passing Arguments(Dynamic values) to JavaScript Function (functional Component).
+
+
+
+     
+** if you are not able to render the Component dynamiacally with what ever the values you have, then what is the piont of "Reusability" concept in React. So Props are the gretest solution for this problem.
+
+
+
+
+
+
+
+
+
+
+
+
+*How to pass the danamic values(Arguments):
+
+            Ex:
+                for Auroma Hydrabad House :        <ResturantCard            resName="Auroma Hydrabad House"                    />
+                for Meghana Foods :                <ResturantCard            resName="Meghana Foods"                            />
+                for KFC :                          <ResturantCard            resName="FMC"                                      />
+
+
+
+    *You can  pass multiple Arguments at a time .
+
+        <ResturantCard        resName="Auroma Hydrabad House"  cuisines :Andra, Telangana, Chinese   Rating: 3.5  DelivaryTime:30 min   Adress:xxxxxxxx   ..             />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*How the incomming values (Arguments) are Received by main Functional Component ? 
+             
+                        or
+How the main functional Component receives the Dynamic values or Props or Properties?
+
+
+    React wraps this  Dynamic values or Props or Properties inside a "Object" called as "props" and it will give that object to functional Component.
+
+
+            Ex: const ResturantCard =   (props)=>{
+                                                 return (
+
+
+
+
+                    console.log(props)                   //Object  
+                                                                resName="Auroma Hydrabad House"
+                                                                cuisines :Andra, Telangana, Chinese
+                                                                Rating: 3.5
+                                                                DelivaryTime:30 min
+                                                                        
+     
+
+
+
+
+
+
+**How to use the incomming props and convert our main Functional Component as Dynamic?
+
+    Use "JSX Expression" feature to handle the incomming data.
+
+
+    Ex:
+        const ResturantCard= (props) =>{
+                        return (
+                            <div className="res-card"> 
+                                <img 
+                                className="res-logo"
+                                alt="res-logo" 
+                                src="https://via.HydrabadRes.img.com/150"
+                                />
+
+                                <h3 {props.resName}</h3>
+
+                                <h4>{props.cuisines}</h4>
+
+                                <h4>{props.Rating}</h4>
+
+                                <h4>{props.DelivaryTime}</h4>
+                            </div>
+                        )
+                    }
+
+
+
+    *Now this functional Component has become a Component that will accepts the Dynamic Data 
+
+        usage:
+            rendaring the two diffrent resturants:
+
+                    <ResturantCard        resName="Auroma Hydrabad House"  cuisines :Andra, Telangana, Chinese   Rating: 3.5                DelivaryTime:30 min                Adress:xxxxxxxx   ..             />
+
+                    <ResturantCard        resName="Girl Friend Mandi"      cuisines :Arabic, Parshian            Rating: 4.2                DelivaryTime:25 min                Adress:xxxxxxxx   ..             />
+
+
+
+
+
+
+
+
+
+
+

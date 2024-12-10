@@ -1,0 +1,24 @@
+{
+  "name": "3.app-with-production-data",
+  "version": "1.0.0",
+  "description": "this application is for  purely for handling props with real productin data, the data is comming from the API's of swiggy and zomato",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "props",
+    "swiggy",
+    "zomato"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "parcel": "^2.13.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "process": "^0.11.10"
+  }
+}

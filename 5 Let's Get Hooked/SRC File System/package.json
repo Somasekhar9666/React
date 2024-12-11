@@ -1,0 +1,25 @@
+{
+  "name": "src-file-system",
+  "version": "1.0.0",
+  "description": "this module includes maintaing SRC file system , Hooks ...",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "import",
+    "export",
+    "src",
+    "components"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "parcel": "^2.13.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "process": "^0.11.10"
+  }
+}

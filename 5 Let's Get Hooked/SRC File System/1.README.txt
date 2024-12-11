@@ -1,0 +1,106 @@
+Before we get into Hooks , Lets know about the How to Maintain the File System for a Project (you can Maintain the FS like you want , this is organzing and structuring)
+
+
+Know more about FS: go to : https://legacy.reactjs.org/docs/faq-structure.html
+
+
+1. All the Source code is kept is "src" folder -------> why? there is no specific reason for that , its because of this is a good Industry Practice.
+
+*2.People use to name componenets with ".js" and ".jxs" , both are same. some may use TypeScript and name as ".tsx". Allare ".js" only 
+
+3. ALL the componenets are Kept in "componenets" Folder, and  Seperate Folder is Maintaintaied for Each componenet and it Impoted/Exported to render it .( build tool will collect them and will build the APP)
+    
+    There are two types of import and Export:
+
+        1.Defult import and export : with default export you can export only one and import only one.
+                Ex: export default Body 
+                    import SwiggyDataList from "../utils/mockData"
+
+                *if you try two default exports in a single file it wil throw error
+
+
+        2.Named import and export : this is can be used when In a single file you have import and export Multiple things.
+
+       ---->       For Export: mention "export" keyword infornt what ever you want. 
+                                Ex: 
+                                    export const logo_url ="https://.....";
+                                    export const CDN_URL ="https://.....";
+                                    
+                                    ****even for componenets : export const Header =()=> {...}
+                                        you can use both default export and named export on single componenet.
+
+                                                         Ex:       import { LOGO_URL } from "../utils/constants"
+
+                                                                        export const Header =()=> {
+                                                                            return (
+                                                                                <div className="header">
+                                                                                    <div className="logo-container">
+                                                                                    <img 
+                                                                                        className="logo"
+                                                                                        src={LOGO_URL} alt="logo" />
+                                                                                    </div>
+                                                                                    <div className="nav-items">
+                                                                                        <ul>
+                                                                                            <li>Home</li>
+                                                                                            <li>About</li>
+                                                                                            <li>contact</li>
+                                                                                            <li>cart</li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                            )
+                                                                        }
+                                                                        export default Header
+
+
+                        *Q.Is this both defalt export and named export will possible to constants also?
+                            Yes, it is possible to use both default export and named export in a constants file. This approach is often used when you want to export a primary constant or an object as the default export while also providing additional specific constants as named exports.
+
+                           Ex:     
+                                // Named exports
+                                export const SWIGGY_CDN_IMAGE_URL = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660";
+                                export const LOGO_URL = "https://example.com/logo.png";
+
+                                // Default export
+                                const DEFAULT_CONSTANTS = {
+                                SWIGGY_CDN_IMAGE_URL,
+                                LOGO_URL,
+                                };
+
+                                export default DEFAULT_CONSTANTS;
+
+                            
+
+                        import DEFAULT_CONSTANTS, { SWIGGY_CDN_IMAGE_URL } from "./constants";
+
+                        console.log(DEFAULT_CONSTANTS.LOGO_URL); // Access via default
+                        console.log(SWIGGY_CDN_IMAGE_URL);       // Access named export
+
+
+
+
+
+
+        ------>    For Import: use curly braces( { } ) . 
+
+                                Ex:  import {CDN_URL,logo_ur} from "../../XXX"                      // . refers to the current directory.
+                                                                                                        .. refers to the parent directory (one level up).
+
+
+                                **import Header, { LOGO_URL } from "./Header";
+                                    "The statement import Header, { LOGO_URL } from "./Header"; works because the Header.js file is combining default export and named export. While LOGO_URL originates from the constants.js file, it can still be re-exported by Header.js. This allows other files to import LOGO_URL from Header.js."
+
+ 
+
+
+
+     i.Export-------------------->Do this before you Import the componenet-----> "First Give then Take"
+        After keeping the componenet in Seperate file use "export default Header(name of the componenet)" or "" to Export the componenet. 
+    
+    ii.Import
+            After the Export , Import like this "import Header(name of the componenet) from "/.componenets/Header(PATH of the componenet)" -->   (/.componenets/Header or /.componenets/Header.js or /.componenets/Header.jsx  ALL are same )
+
+4. If you have any Hard coded Data(like constants, footer component ,Big strings ,links.. ) Never keep that in any component file. Please  keep a seperate folder and a Seperate file it like "utils.js" or "constants.js" ....
+            
+
+

@@ -1,0 +1,167 @@
+In the Previous session as we Discussed "We can turn this into a "Super Powered" Vabiale called "STATE", so that React will acknowlege this and renders acc to this".
+
+Q. How the Normal variable gets super power and its converted to a "super Powered variable called" STATE?
+
+* Ans: In react there is one concept called "Hooks" . this hooks will grant the super power so that  React acknowleges that variable.
+
+
+
+
+------------------------------------------------HOOKS-----------------------------------
+        Hooks:
+        what is hook in real world:
+
+                The "hook" is which allows you to "attach something extra" to an existing system or object. It’s a simple and versatile way to add functionality without modifying the base object.
+
+                A hook in the real world is something used to attach, catch, or hold something. For example:
+
+                                A coat hook holds your jacket.
+                                
+                                A fishing hook catches a fish.
+                                
+                                A wall hook allows you to hang decorations.
+        
+
+        ***Q.How This Concept Relates to React Hooks
+                React hooks are called hooks because they allow you to "hook into" React's features and "attach" extra functionality to your functional components.
+                   
+                                                                        or
+                *React Hooks are the Functions that attach React features to components.
+
+                
+    
+
+
+---------------------------------------------------------------------------useState-------------------------------------------------------------------------------------------------------
+useState:
+        *"useState is react Hook (function) that attaches the react feature "Statemangemnt" to a normal Plain JS variable"
+
+                                                    or
+
+        *"useState is function that grants "Statemangemnt" super power to regular JS variable so that React acknowledge changes to the variable and automatically re-render the component whenever its value updates."
+    
+
+        **Basic Syntax:
+
+            const [state, setState] = useState(initialValue);
+
+                                    or 
+
+            const array=useState(initialValue);
+            const state=array[0]
+            const setState=array[1]
+                
+
+                            state: The variable that stores the current state value.
+                            
+                            setState: A function to update the state. React automatically triggers a re-render when setState is called. 
+                                        
+                                       **This acts a trigger to update the Change , as soon as this function called , the state got updated ,then virtual DOM got upadted , then react uses Diff Algorithm to compare the changes , then immediately it only re-renders the changes , not entire DOM
+                            
+                            initialValue: The starting value of the state.
+
+
+
+
+    Ex: Counter Application
+
+        Without useState:
+
+                    const Counter = () => {
+                            let count = 0;
+
+                            const increment = () => {
+                                count++;
+                                console.log("Count:", count); // The variable updates
+                            };
+
+                            return (
+                                <div>
+                                    <p>Count: {count}</p> {/* This won't update */}
+                                    <button onClick={increment}>Increment</button>
+                                </div>
+                            );
+                        };
+
+
+            Here without the useState : even though you clicl the button , React won’t re-render the UI.
+
+
+        With uses:
+
+                import React, { useState } from "react";
+
+                function Counter() {
+                const [count, setCount] = useState(0); // Initialize state with 0
+
+                const increment = () => {
+                    setCount(count + 1);                // Update state
+                };
+
+                return (
+                    <div>
+                    <p>Current Count: {count}</p>
+                    <button onClick={increment}>Increment</button>
+                    </div>
+                );
+                }
+
+
+
+
+
+*How useState Hooks Into React’s State Management:
+
+                            1.Attach State to Component: When useState is called, React remembers the state for that specific component. It associates the state with the component instance.
+
+                            2.Track Changes: The setState function notifies React when the state changes. React then re-renders the component to update the UI.
+
+                            3.Persistent(Adugu aaduguna) State Across Renders: Unlike local variables, state created with useState persists across renders.
+
+        *Behind the Scenes:
+        
+                    React uses an internal state queue to track state changes.
+                    
+                    When setState is called, React pushes the new value into the queue and schedules the component to re-render.
+
+
+
+
+
+*Why Does useState Attach State Management to a Variable?
+                        1.React’s Memory System: React uses a "memory system" (like a stack of hooks) to keep track of each useState call in a component. It stores the value of the state and the corresponding setState function.
+
+                        2.Unique State for Each Component: Each component instance gets its own separate state, even if the same component is rendered multiple times.
+
+
+
+
+
+*Some Use Cases for State Management: 
+
+        Form Handling:
+                const [inputValue, setInputValue] = useState("");
+
+                const handleChange = (e) => setInputValue(e.target.value);
+
+
+
+        Toggling UI Elements:
+
+                const [isVisible, setIsVisible] = useState(false);
+
+                const toggleVisibility = () => setIsVisible(!isVisible);
+        
+        
+        
+        Fetching Data:
+
+                const [data, setData] = useState([]);
+                useEffect(() => {
+                fetch("https://api.example.com")
+                    .then(response => response.json())
+                    .then(data => setData(data));
+                }, []);
+
+
+

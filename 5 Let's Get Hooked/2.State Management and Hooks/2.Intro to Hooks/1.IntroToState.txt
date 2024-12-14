@@ -1,0 +1,60 @@
+State , hooks, Statemangemnt with hooks ..
+
+In the Previous sessions we got to know that React won't keep track of the local variables .
+
+*Q.So how we have to make the React to recognose those kind of variables. 
+
+    **We can turn this into a "Super Powered" Vabiale called "STATE", so that React will acknowlege this and renders acc to this. 
+
+
+        Q. what is State actually?
+
+           state is just the "current situation or condition" of something that can change over time. 
+           
+           Examples:
+                    Traffic Lights: The "state" of a traffic light can be Red, Yellow, or Green. When the state changes, the light changes.
+                    
+                    Bank Account Balance: The "state" of your bank account is the current balance. Any deposit or withdrawal updates the state.
+                    
+                    Room Temperature: The current temperature is the state. A thermostat adjusts it when the temperature changes.
+
+            
+
+        Q.what is State  whne it comes to Functional Componet?
+
+            "State is a variable that Manages and Moniters the Data Changes in component and reports that changes to react" 
+
+            It represents the current condition of your application.
+
+            Example Use Cases in Web Apps:
+
+                Counter Application: Tracking the number of clicks.
+
+                Form Inputs: Keeping track of what the user types in a text box.
+
+                To-Do List: Keeping track of the items in your list.
+
+                Shopping Cart: Storing the list of items you’ve added to the cart.
+
+                Authentication: Knowing whether the user is logged in or out.
+
+
+
+        **Best Analogy for State:
+
+                Imagine you're running a fast-food restaurant:
+
+                        You have a menu (static data, doesn’t change).
+
+                        You have orders (dynamic data, changes based on customers).
+
+                        The "state" is the current list of orders:
+
+                                When a customer places an order, the order list (state) updates.
+
+                                You (React) immediately update the kitchen (UI) with the new list.
+
+
+
+
+            

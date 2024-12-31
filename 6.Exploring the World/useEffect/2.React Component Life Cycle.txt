@@ -1,0 +1,30 @@
+"React component lifecycle" refers to the sequence of stages that a "React Component" goes through during its existence in an application, including when it is created, updated, and removed from the UI( removed from the DOM).
+
+The Stages are : 
+
+    1. Mounting Stage (Component is Created and Added to the DOM)
+
+            What Happens:
+                        The component is initialized and inserted into the DOM.
+                        
+                        This is the phase where you fetch initial data or set up necessary subscriptions.
+    
+
+
+    2. Updating Stage (Component Re-Renders Due to State/Props Changes)
+        
+            What Happens:
+                        The component updates whenever its state or props change.
+
+                        This is the phase where you might perform actions based on updated data.
+
+
+
+    3. Unmounting Stage (Component is Removed from the DOM)
+
+            What Happens:
+                        The component is removed from the DOM.
+
+                        This is where you clean up resources like event listeners, timers, or subscriptions to avoid memory leaks.
+
+

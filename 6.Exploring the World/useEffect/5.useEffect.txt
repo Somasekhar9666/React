@@ -1,0 +1,93 @@
+
+            
+    *---> As we already know side effects are Generated or triggered when component goes to its lifecycle stages(Mounting, Updating, Unmounting).
+
+    *--->If we use class component, we have special hook to handle side effects for each stage
+
+
+
+*Q>then what about if we use Functionl component?
+
+    In Functionl Components "useEffect" Hook is used to handle the side Effects .
+
+    UseEffect: 
+            "The useEffect hook in React is a function that allows functional components to perform side effects, such as Data fetching, subscriptions, or manually updating the DOM."
+
+
+
+
+*---> "The useEffect Mimic Lifecycle Hooks (componentDidMount,componentDidUpdate,componentWillUnmount)":
+
+        In Class Component the life cycle hooks(methods) will handle the side effects at each lifecycle stage. 
+
+        ***But in Functionl components the Single UseEffect Hook will Mimic all the 3 hooks. It will single handlley an handle the side effects for all three stages (mounting, updating, and unmounting).
+
+
+**----> So useEffect will handle all types of side effects that are Generated or Triggred in each lifecycle Stage(Mounting, Updating, Unmounting) of a functional component.
+
+
+
+
+
+
+
+
+Basic Syntax of useEffect:
+
+                useEffect
+                (
+                    () => 
+
+                                {
+                                        // Effect logic goes here (e.g., API calls, subscriptions, timers)
+                        
+                                        return () => {// Optional, cleanup logic (e.g., unsubscribing, clearing timers)};
+                                
+                                }, [dependencies]  // Array of dependencies
+                    
+                ); 
+
+
+
+    Explanation
+            1.Callback Function (() => {}):
+                    Contains the side effect logic that runs after the component renders.
+
+
+            2.Cleanup Function (return () => {}):
+                    Optional. Runs before the component unmounts or before the effect re-runs (for updates).
+
+
+            *3.Dependency Array ([dependencies]):
+                i.If empty ([]), the effect runs only once after the initial render (like componentDidMount).
+                
+                ii.If specific dependencies are listed, the effect re-runs whenever any dependency changes (like componentDidUpdate).
+                
+                iii.If omitted, the effect runs after every render.
+
+
+    
+Simple Use Case: Logging a Message on Mount: 
+
+
+    import React, { useEffect } from 'react';
+
+        function Welcome() {
+        useEffect(
+                    () => {
+                                console.log('Component has been mounted!');
+                                
+                                return () => {console.log('Component is about to unmount!');};
+                                
+                        },   []  // Runs only once on mount
+        
+                 ); 
+        
+
+
+        return <h1>Welcome to React!</h1>;
+        }
+
+
+        export default Welcome;
+

@@ -1,0 +1,169 @@
+The side effects are Generated at each stage of a component(at mounting , at updating , at unmounting) . 
+
+
+
+ 
+
+    1. If you are using Class Components: 
+
+                use Class Component Life cycle Hooks:
+        
+                ***The class component provides Special Methods called "Life Cycle Hooks" to manage Side Effects at each stage.
+                    
+                    1.componentDidMount Hook: For side effects after the component is first rendered (mounted).
+                    
+                    2.componentDidUpdate Hook: For side effects after the component updates (when props or state change).
+                    
+                    3.componentWillUnmount Hook: For cleanup actions before the component is removed (unmounted).
+
+
+    
+    2. It is Functionl Components: 
+
+                Just use  "useEffect" Hook. 
+
+
+
+
+
+
+
+------> Handling  Side Effects with Class component  Lifecycle Hooks in Class Components at each stages:
+
+
+    i.Handling Side Effects During Mounting stage:
+        
+        Use the "componentDidMount" lifecycle hook for actions(side effects) like fetching data, adding event listeners, or initializing subscriptions.
+
+        Ex:
+        import React, { Component } from 'react';
+
+        class NewsFeed extends Component {
+        state = {
+            articles: [],
+        };
+
+        **************
+        componentDidMount() {
+            // Fetching data when the component is mounted
+            fetch('https://api.example.com/news')
+            .then(response => response.json())
+            .then(data => this.setState({ articles: data }));
+        }
+
+
+        render() {
+            return (
+            <div>
+                <h1>Latest News</h1>
+                <ul>
+                {this.state.articles.map((article, index) => (
+                    <li key={index}>{article.title}</li>
+                ))}
+                </ul>
+            </div>
+            );
+        }
+        }
+
+
+
+
+
+    ii.Handling Side Effects During Updating:
+
+        Use the "componentDidUpdate" lifecycle method for actions that depend on changes to state or props.
+    
+
+        class Counter extends Component {
+
+            state = { count: 0 };
+
+            componentDidUpdate(prevProps, prevState) {
+                if (prevState.count !== this.state.count) {
+
+                // Example of side effect: updating the document title
+                document.title = `Count: ${this.state.count}`;
+                }
+            }
+
+            increment = () => {
+                this.setState({ count: this.state.count + 1 });
+            };
+
+            render() {
+                return (
+                <div>
+                    <h1>Count: {this.state.count}</h1>
+                    <button onClick={this.increment}>Increment</button>
+                </div>
+                );
+            }
+            }
+
+
+
+               
+
+    iii.Handling Side Effects During Unmounting:
+            
+            Use the componentWillUnmount lifecycle method for cleanup actions like removing event listeners, unsubscribing from services, or clearing intervals.
+
+        Ex:
+        class Timer extends Component {
+
+            state = { time: 0 };
+            timerId = null;
+
+            componentDidMount() {
+                // Setting up a timer when the component is mounted
+                this.timerId = setInterval(() => {
+                this.setState({ time: this.state.time + 1 });
+                }, 1000);
+            }
+
+            componentWillUnmount() {
+                // Clearing the timer when the component is unmounted
+                clearInterval(this.timerId);
+            }
+
+            render() {
+                return <h1>Time Elapsed: {this.state.time}s</h1>;
+            }
+
+        }
+
+
+
+
+
+
+
+
+-----> Handling Combined Side Effects
+
+        Sometimes, you may need to handle side effects across multiple stages, such as adding an event listener during mounting and removing it during unmounting.
+
+        class WindowResizeTracker extends Component {
+  
+            state = { width: window.innerWidth };
+
+            updateWidth = () => {
+                this.setState({ width: window.innerWidth });
+            };
+
+            componentDidMount() {
+                // Adding event listener on mount
+                window.addEventListener('resize', this.updateWidth);
+            }
+
+            componentWillUnmount() {
+                // Removing event listener on unmount
+                window.removeEventListener('resize', this.updateWidth);
+            }
+
+            render() {
+                return <h1>Window Width: {this.state.width}px</h1>;
+            }
+            }
+

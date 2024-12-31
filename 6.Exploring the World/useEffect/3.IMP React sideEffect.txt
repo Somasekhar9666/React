@@ -1,0 +1,101 @@
+what is/are side effects when it comes to React?
+
+****Side effects are the actions or tasks  that are being Triggred when the React Component undergoes life cycle methods (Mounting, Updating, Unmounting).***
+
+
+            In React:
+
+                    Effect: The primary goal of rendering a component is to produce a UI, based on the state and props. For example, rendering a restaurant's information like its name, location, and rating.
+
+                    Side Effect: Any additional operations that happen as a result of rendering but are not part of rendering itself. 
+                    
+                    These operations:
+                            Interact with the outside world (e.g., making API calls, logging data, or updating document.title).
+                            Occur alongside rendering but are not directly managed by React
+
+ 
+
+
+            Comparing the Vaccine Example with React:
+
+                    Vaccine Example
+                        Effect: Immunity (main goal).
+                        
+                        Side Effect: Body pains (additional unintended outcome).
+
+
+                    React Example
+                        Effect: Rendering a UI based on state/props (main goal).
+                        
+                        Side Effect: Updating document.title, making API calls, etc. (additional operations triggered as a result of rendering).
+
+            
+
+
+Ex:
+    Side Effects at Different Stages of a React Component's Lifecycle
+    Here are some common and important side effects that are triggered at mounting, updating, and unmounting stages of a React component:
+    
+
+
+    1. Side Effects When the Component is Mounted:
+
+                Side Effect	                                                       Description	                                                                                        Example
+            
+            Fetching initial data	                                    Retrieve data from an API to populate the UI.	                                                   Fetching a list of news articles or user data.
+            
+            Adding event listeners	                                    Attach global event listeners like resize or scroll.	                                           Listening for window resize to adjust the layout.
+            
+            Setting up subscriptions	                                Connect to a WebSocket or subscribe to real-time data sources.	                                   Subscribing to a chat room or stock price updates.
+            
+            Initializing timers	                                        Start a timer for periodic tasks.	                                                                Setting an interval to fetch data every few seconds.
+            
+            Updating browser metadata	                                Update document title or meta tags.	                                                               Changing the title to reflect the current page or app state.
+
+
+
+
+
+
+    2. Side Effects When the Component is Updated
+
+        These are triggered when the state or props of the component change.
+
+               Side Effect	                                                                Description	                                                                        Example
+            Re-fetching data	                                                    Fetch data based on updated state or props.	                                         Fetching weather data when the selected city changes.
+            
+            Updating the DOM	                                                    Dynamically adjusting styles or attributes of DOM elements.	                         Changing the color of a heading based on a counter.
+            
+            Synchronizing external state	                                        Update local storage, session storage, or a Redux store.	                         Storing the latest user input in local storage.
+            
+            Updating browser title	                                                Reflect the new state in the browser’s metadata.	                                 Showing the current counter value in the browser tab title.
+            
+            Re-subscribing to resources	                                            Adjust subscriptions based on new props or state.	                                 Subscribing to a new WebSocket room when the room ID changes.
+    
+
+
+
+
+
+
+
+    3. Side Effects When the Component is Unmounted
+            These are cleanup actions to avoid memory leaks or unexpected behaviors when the component is removed from the DOM.
+
+                    Side Effect	                                                                       Description	                                                                                 Example
+                
+                Removing event listeners	                                                 Detach global event listeners to prevent memory leaks.	                                           Removing resize or scroll event handlers.
+
+                Cleaning up subscriptions	                                                 Disconnect WebSocket connections or unsubscribe from real-time updates.	                       Disconnecting from a live chat room or stock ticker.
+
+                Clearing timers/intervals	                                                 Stop any ongoing intervals or timeouts.	                                                       Clearing an interval fetching data periodically.
+
+                Resetting external states	                                                 Perform any necessary state reset or resource deallocation.	                                   Closing database connections or cleaning up temporary files.
+
+
+
+
+
+
+
+How to Handle this Side Effects?

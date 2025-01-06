@@ -1,0 +1,271 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+
+}
+
+.logo {
+    width: 150px; /* Adjust to fit your layout */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Ensures proper alignment */
+    margin: 0 auto; /* Center if in a container */
+    max-width: 100%; /* Ensure responsiveness */
+    object-fit: contain; /* Ensure it fits within its container */
+  }
+  
+/* Card styling */
+.res-card {
+    width: 250px; /* Adjusted width for better look */
+    border-radius: 10px; /* Rounded corners */
+    background-color: #fff; /* White background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px;
+    margin: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover */
+    text-align: center;
+    font-family: 'Arial', sans-serif; /* Font family */
+}
+
+/* Image styling */
+.res-logo {
+    width: 100%; /* Makes the image fill the width of the card */
+    height: auto;
+    border-radius: 10px; /* Rounded corners for the image */
+    object-fit: cover; /* Ensures the image covers the space without distorting */
+    margin-bottom: 15px; /* Space between image and text */
+}
+
+/* Text styling */
+.res-card h3 {
+    font-size: 1.2rem; /* Font size for the restaurant name */
+    font-weight: bold;
+    margin-bottom: 10px; /* Space between name and other text */
+    color: #333; /* Dark text color */
+}
+
+.res-card h4 {
+    font-size: 1rem; /* Font size for the cuisine and rating */
+    color: #555; /* Slightly lighter text color */
+    margin: 5px 0; /* Small margin between h4 elements */
+}
+
+/* Hover effect */
+.res-card:hover {
+    transform: translateY(-5px); /* Lifts the card when hovered */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Darker shadow on hover */
+}
+
+/* Optional - badge style if you have any */
+.res-card .badge {
+    background-color: #28a745; /* Green badge */
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+
+
+.nav-items>ul{
+    font-size: 24px;
+    display: flex;
+    padding: 0px 20px;
+
+    list-style-type: none;
+}
+
+.nav-items>ul>li{
+    padding: 10px;
+    margin:10px ;
+
+}
+
+
+
+.res-card:hover{
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+
+.search-bar{
+    padding: 10px;
+}
+
+
+.rest-container{
+    display: flex;
+    flex-wrap: wrap;
+
+
+
+}
+
+
+
+
+
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .card {
+    width: 300px;
+    height: 400px;
+    background: #f4f4f4;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card .shimmer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    animation: shimmer 1.5s infinite;
+  }
+  
+  .card-image {
+    width: 100%;
+    height: 60%;
+    background-color: #ddd; /* Placeholder for image */
+  }
+  
+  .card-content {
+    padding: 15px;
+    height: 40%;
+  }
+  
+  .card-title,
+  .card-description,
+  .card-button {
+    background-color: #ddd;
+    height: 20px;
+    margin: 5px 0;
+  }
+  
+  .card-button {
+    width: 80%;
+    margin: 10px 0;
+    height: 35px; /* Mimic a button */
+    background-color: #bbb;
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: -200px 0;
+    }
+    100% {
+      background-position: 200px 0;
+    }
+  }
+  
+
+
+
+
+
+
+/* General Reset */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* Search Logic */
+.search-logic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px;
+  margin: 20px auto;
+  max-width: 600px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+.search-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.search-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.search-btn:active {
+  background-color: #004085;
+  transform: translateY(0);
+}
+
+/* Top Rated Section */
+.top-rated {
+  max-width: 600px;
+  margin: 20px auto;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.top-rated-title {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #007bff;
+  text-align: center;
+}
+
+.top-rated-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.top-rated-item {
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.top-rated-item:hover {
+  background-color: #e0e0e0;
+}

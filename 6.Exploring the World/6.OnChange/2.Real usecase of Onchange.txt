@@ -1,0 +1,268 @@
+import ResturantCard from "./ResturantCard"
+import SwiggyDataList from "../utils/mockData"
+import Shimmer from "./Shimmer"
+import {useState} from "react"
+import { useEffect } from "react"
+
+
+
+
+
+const  Body= ()=>{
+
+  const [resList,setResList]=useState([])
+  const [searchText,setSearcText]=useState("what is in your mind....")                                
+  useEffect(()=>{fetchData()}, [])
+
+ 
+
+  async function fetchData() {
+    try {
+      const response = await fetch(
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4287518&lng=78.3254948&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const jsonData = await response.json(); // Parse the JSON response
+      console.log("Fetched data:", jsonData); // Log the data for debugging
+      const restaurants = jsonData?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];       //Extracting Entire Resturants array
+      console.log(`only resturnats data is: ${restaurants} and type is ${typeof(restaurants)}`)
+      setResList(restaurants); // Update the state with the fetched data
+    } catch (error) {
+      console.error("Error fetching data:", error); // Handle errors
+    }
+  }
+
+
+    const fetchData2= async ()=>{
+    const data=await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4287518&lng=78.3254948&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
+    const json=await data.json()
+         }
+
+
+    // Conditional Rendering
+    if (resList.length===0){
+        return <Shimmer/>                                 // Rendering Shimmer UI Untill UseEffect Fetch call is made 
+    }
+
+    return (
+        <div className="body">
+
+            <div className="filter-btn">
+                <button 
+                className="filter-btn" 
+                onClick={() => {
+                  const topRes=resList.filter((res)=>res.info.avgRating>4.5);
+                  setResList(topRes)                                                        // calling the function is like a trigger, react will got to know that Dom is changed ,so that it will re-render the UI
+                }}>Top Rated Restaurants</button>
+            </div>
+
+
+            <div className="search-logic">
+             <input className="search-input" type="text" value={searchText}></input>
+            <button className="search-btn" onClick={()=>{}}> search</button>
+            </div>
+
+
+
+            <div className="rest-container">
+              {console.log(resList)}
+                  {resList.map(
+                                (resturant) => (<ResturantCard  key ={resturant.info.id} Details={resturant}/>)
+                              )} 
+            </div>
+        </div>
+
+    )
+}
+
+
+
+
+export default Body
+
+
+
+
+
+In this component i am trying to understanding  working of a  input tag and local state variable that  being attached ,  
+1. how come the statevarible "searchText" and value inside the input tag is connected  or linked ,  
+2. which one will  control which  , what is the relation b/w them ? 
+3.how the rendrering  process will happen here . 
+4. why i can not edit the defualt value inside the input tag  after the render  , what exactly happening here ,  
+
+
+
+
+
+
+1. How the searchText state variable and the value in the <input> tag are connected or linked
+    The value attribute of the <input> tag is set to the value of the searchText state variable:
+
+            value={searchText}
+
+        In React, this creates a controlled component, where the value displayed in the input field is controlled by the React state (searchText in this case).
+
+    Connection:
+        One-way data flow: "The searchText state determines what is displayed inside the <input> field." React renders the component with the current state value (searchText), ensuring that the input field reflects this value.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2. Which one will control which? What is the relationship between them?
+        Control Direction:
+                In a controlled component, the state variable (searchText) controls the value in the input field.
+                
+                When the searchText state updates (via setSearchText), React re-renders the component, and the new value is reflected in the <input> field.
+        
+
+
+        User Input Handling:
+                To allow users to edit the value in the input field, you must handle the onChange event and update the searchText state dynamically:
+        
+                            <input
+                            className="search-input"
+                            type="text"
+                            value={searchText}
+                            onChange={(e) => setSearchText(e.target.value)}
+                            />
+
+                    The onChange handler captures the user's input (e.target.value) and updates the searchText state using setSearchText.
+        
+        
+        
+        Cycle:
+                User types → onChange fires → setSearchText updates state → Component re-renders → Input value updates to match searchText.
+
+
+
+
+
+
+
+
+3. How the rendering process will happen here
+
+    Initial Render:
+            React initializes the state variable searchText to "what is in your mind....".
+            
+            The <input> field's value is set to searchText, so the input initially displays "what is in your mind....".
+    
+    Subsequent Renders:
+
+            If the searchText state changes (e.g., due to user input handled via onChange), React triggers a re-render.
+            
+            During the re-render, React updates the DOM to reflect the current state of searchText in the value attribute of the <input>.
+        
+    
+    Key Points:
+
+            React ensures that the DOM stays in sync with the state (searchText).
+            
+            The rendering process is efficient because React only updates the parts of the DOM that changed (Virtual DOM reconciliation).
+
+
+
+
+
+
+
+
+
+
+
+4. Why can't I edit the default value inside the input tag after the render?
+        
+        The <input> is a controlled component:
+            Since its value is set directly to searchText, any user input is ignored unless you update the searchText state in response to user input.
+        
+        
+        What happens in your code:
+
+            value={searchText} ensures that the input field's displayed value is always equal to searchText.
+            
+            Without an onChange handler, user inputs cannot modify searchText, so the input field doesn't update visually when you type
+
+
+        
+        Solution: To allow the user to edit the input:
+
+                <input
+                className="search-input"
+                type="text"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                />
+
+        The onChange handler updates the searchText state with the user's input (e.target.value), enabling the input field to reflect changes.
+
+
+
+
+
+Final Workflow with Example:
+Updated Body component to include onChange:
+
+        const Body = () => {
+        const [resList, setResList] = useState([]);
+        const [searchText, setSearchText] = useState("what is in your mind....");
+
+        useEffect(() => {
+            fetchData();
+        }, []);
+
+        async function fetchData() {
+            // Fetch logic
+        }
+
+        return (
+            <div className="body">
+            <div className="search-logic">
+                <input
+                className="search-input"
+                type="text"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)} // Updates the state
+                />
+                <button className="search-btn" onClick={() => console.log(searchText)}>
+                Search
+                </button>
+            </div>
+
+            <div className="rest-container">
+                {resList.map((resturant) => (
+                <ResturantCard key={resturant.info.id} Details={resturant} />
+                ))}
+            </div>
+            </div>
+        );
+        };
+
+
+
+
+
+
+
+Key Takeaways:
+        The searchText state controls the input value.
+        
+        Updates to the searchText state trigger re-renders, ensuring the input reflects the new value.
+        
+        Without an onChange handler, user edits are ignored because React keeps the input strictly bound to the state value.

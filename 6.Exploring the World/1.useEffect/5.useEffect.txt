@@ -1,0 +1,286 @@
+
+            
+    *---> As we already know side effects are Generated or triggered when component goes to its lifecycle stages(Mounting, Updating, Unmounting).
+
+    *--->If we use class component, we have special hook to handle side effects for each stage
+
+
+
+*Q>then what about if we use Functionl component?
+
+    In Functionl Components "useEffect" Hook is used to handle the side Effects .
+
+    UseEffect: 
+            "The useEffect hook in React is a function that allows functional components to perform side effects, such as Data fetching, subscriptions, or manually updating the DOM."
+
+
+
+
+*---> "The useEffect Mimic Lifecycle Hooks (componentDidMount,componentDidUpdate,componentWillUnmount)":
+
+        In Class Component the life cycle hooks(methods) will handle the side effects at each lifecycle stage. 
+
+        ***But in Functionl components the Single UseEffect Hook will Mimic all the 3 hooks. It will single handlley an handle the side effects for all three stages (mounting, updating, and unmounting).
+
+
+**----> So useEffect will handle all types of side effects that are Generated or Triggred in each lifecycle Stage(Mounting, Updating, Unmounting) of a functional component.
+
+
+
+
+
+
+
+
+Basic Syntax of useEffect:
+
+                useEffect
+                (
+                    () => 
+
+                                {
+                                        // Effect logic goes here (e.g., API calls, subscriptions, timers)
+                        
+                                        return () => {// Optional, cleanup logic (e.g., unsubscribing, clearing timers)};
+                                
+                                }, [dependencies]  // Array of dependencies
+                    
+                ); 
+
+
+
+    Explanation
+            1.Callback Function (() => {}):
+                    Contains the side effect logic that runs after the component renders.
+
+
+            2.Cleanup Function (return () => {}):
+                    Optional. Runs before the component unmounts or before the effect re-runs (for updates).
+
+
+            *3.Dependency Array ([dependencies]):
+                i.If empty ([]), the effect runs only once after the initial render (like componentDidMount).
+                
+                ii.If specific dependencies are listed, the effect re-runs whenever any dependency changes (like componentDidUpdate).
+                
+                iii.If omitted, the effect runs after every render.
+
+
+    
+
+
+
+
+
+ Use Case: Making an API CALL to get Restarunts Details :
+
+-------------------------------->Without useEffect
+    const  Body= ()=>{
+
+                const [resList,setResList]=useState([])       //  Restarunts Details as State 
+
+                fetchData()                                   //   function which fetches the Data from backend
+                
+
+                async function fetchData() {
+                        try 
+                        
+                        {
+                                const response = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4287518&lng=78.3254948&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+
+                                if (!response.ok) {
+                                        throw new Error(`HTTP error! Status: ${response.status}`);
+                                }
+
+                                const jsonData = await response.json(); // Parse the JSON response
+
+                                console.log("Fetched data:", jsonData); // Log the data for debugging
+
+                                const restaurants = jsonData?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];         // Extracting only Restarunts from the Reponse
+
+                                setResList(restaurants); // Update the state with the fetched data
+
+                        } 
+                        catch (error) 
+                        {
+                                console.error("Error fetching data:", error); // Handle errors
+                        }
+                }
+
+
+
+
+                return (
+                        <div className="body">
+                        <div className="filter-btn">
+                                <button 
+                                className="filter-btn" 
+                                onClick={() => {
+
+                                const topRes=resList.filter((res)=>res.info.avgRating>4.5);
+                                
+                                setResList(topRes)                                                        // calling the function is like a trigger, react will got to know that Dom is changed ,so that it will re-render the UI
+
+                                console.log("Top Rated Restaurant is:",topRes);
+
+                                }}>Top Rated
+                        </button>
+                        </div>
+
+                
+
+                        <div className="rest-container">
+                                {resList.map(
+                                                (resturant) => (<ResturantCard  key ={resturant.info.id} Details={resturant}/>)
+                                            )
+                                } 
+                        </div>
+                        </div>
+
+                )
+}
+
+
+export default Body
+
+--------> *Q.If you use the above component , it call the API in a Loop and re-renders in a loop, why?
+
+***Explanation :  
+
+                *"we already know that Component renders or re-renders when ever there is change is State , Props and Context .
+
+                 Aslo if the component renders or re-renders it Executes the function everytime."*
+
+
+
+                The fetchData() function is directly invoked during the rendering phase of the Body component. This means:
+
+                                Every time the component renders or re-renders, fetchData() is called.
+                                
+                                *When fetchData updates the state via setResList(restaurants), it triggers a re-render because the state changes.
+                                
+                                The re-render causes the component to execute again, which calls fetchData() again.
+                                
+                                **This creates an Infinite Loop of render → fetch → state update → render.
+
+
+
+
+
+        --->How to Fix It?
+                To prevent the infinite loop, you need to ensure that fetchData is called only once when the component is first mounted. This can be achieved using the useEffect hook with an empty dependency array.
+
+                import { useState, useEffect } from "react";
+
+                        const Body = () => {
+                        const [resList, setResList] = useState([]);
+
+                        // Use useEffect to call fetchData only once when the component mounts
+                        useEffect(() => {
+                        console.log("Making API Call...");
+                        fetchData();
+                        }, []); // Empty dependency array ensures this runs only on mount
+
+                        async function fetchData() {
+                        try {
+                        const response = await fetch(
+                                "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4287518&lng=78.3254948&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+                        );
+
+                        if (!response.ok) {
+                                throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+
+                        const jsonData = await response.json();
+                        console.log("Fetched data:", jsonData);
+                        const restaurants =
+                                jsonData?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle
+                                ?.restaurants || [];
+                        setResList(restaurants);
+                        } catch (error) {
+                        console.error("Error fetching data:", error);
+                        }
+                        }
+
+                        return (
+                        <div className="body">
+                        <div className="filter-btn">
+                                <button
+                                className="filter-btn"
+                                onClick={() => {
+                                const topRes = resList.filter(
+                                (res) => res.info.avgRating > 4.5
+                                );
+                                setResList(topRes);
+                                console.log("Top Rated Restaurants:", topRes);
+                                }}
+                                >
+                                Top Rated
+                                </button>
+                        </div>
+
+                        <div className="rest-container">
+                                {resList.map((restaurant) => (
+                                <ResturantCard
+                                key={restaurant.info.id}
+                                Details={restaurant}
+                                />
+                                ))}
+                        </div>
+                        </div>
+                        );
+                        };
+
+                        export default Body;
+
+        
+
+
+        Explanation of Fix:
+
+                1.useEffect Hook:
+                        React's useEffect hook allows you to perform side effects like API calls.
+                        
+                        Adding an empty dependency array ([]) ensures the effect runs only once when the component mounts.
+                
+                
+                2.State Management:
+                        setResList(restaurants) updates the state with fetched data.
+                        
+                        State updates trigger a re-render, but useEffect ensures fetchData isn't called again.
+                
+                
+                3.Infinite Loop Prevention:
+
+                        Without useEffect, fetchData() is invoked on every render, causing an infinite loop.
+                        
+                        useEffect avoids this by limiting when the function is executed.
+        
+
+        **Using a dependency array [] in the useEffect hook is equivalent to mimicking the behavior of the componentDidMount lifecycle method in class components. Here's why:
+                        
+                        Q.What Does componentDidMount Do?
+                                In class components, componentDidMount is executed once after the component is mounted (i.e., added to the DOM). It is typically used for:
+
+                                        Fetching data from an API.
+                                        
+                                        Setting up subscriptions or event listeners.
+                                        
+                                        Performing side effects that only need to happen once.
+                        
+
+                        Q.How useEffect([]) Mimics componentDidMount
+                                                1.Empty Dependency Array:
+
+                                                        useEffect(() => {
+                                                        // Side effect logic here
+                                                        }, []);
+
+
+                                                        The empty array ensures that the useEffect logic runs only once, just after the component is rendered for the first time (mounted).
+                                                
+                                                *2.One-Time Execution:
+                                                        *React skips re-running the useEffect code unless one of the dependencies in the array changes.
+                                                
+                                                        *Since the array is empty, the effect does not depend on anything, so it behaves like componentDidMount
+

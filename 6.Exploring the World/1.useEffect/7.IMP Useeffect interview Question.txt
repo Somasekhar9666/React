@@ -1,0 +1,11 @@
+ 
+ 
+ **Q.why useeffect is  called after the empty componet is rendered , why it useeffect is excuted before only . so that i need to render fake cards untill it being called ?
+
+                    or 
+
+    Why is useEffect called after the empty component is rendered? Why isn't useEffect executed beforehand? This makes me render fake cards until it is called."
+
+
+        Ans: 
+            "useEffect is used to handle side effects like fetching data or setting up subscriptions, while the main effect is rendering the UI. It doesn’t block the initial rendering of the component. Once rendering is complete, React allows the side effects to execute, such as making a fetch call." 

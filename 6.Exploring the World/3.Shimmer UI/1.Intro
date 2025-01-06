@@ -1,0 +1,7 @@
+Shimmer UI refers to a visual effect used in user interfaces to indicate that content is loading or being fetched. It's a type of skeleton loader that simulates the look of content being displayed with a shimmering or pulsing effect. This effect typically uses light animation (like a gradient moving across the content) to give the impression that data is actively being loaded.
+
+
+*It will create the  Fake effect on the UI while useEffect will fetch the Data from the Bckend , untill it will create  fake Loading. 
+
+
+    Ref: P1

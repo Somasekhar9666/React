@@ -1,0 +1,117 @@
+
+
+Native Events:
+        
+        Definition: Native events are events directly provided by the browser's DOM API (e.g., click, keyup, mouseover).
+        
+        Characteristics:
+            They are part of the browser's default event system.
+            
+            Triggered by user actions (like clicking, typing) or programmatically (element.click()).
+        
+
+        Ex:
+            const button = document.querySelector("button");
+            button.addEventListener("click", (event) => {
+            console.log("Native event:", event.type);
+            });
+    
+
+
+Synthetic Events
+            
+            Definition: Synthetic events are React's abstraction over native events. They provide a consistent interface across all browsers.
+        
+        Characteristics:
+                React wraps the native event in a SyntheticEvent object to normalize browser inconsistencies.
+                
+                They pool and reuse event objects for performance optimization.
+
+
+                Ex:
+                function App() {
+                const handleClick = (event) => {
+                    console.log("Synthetic event:", event.type);
+                };
+                return <button onClick={handleClick}>Click Me</button>;
+                }
+
+
+*************************
+Workflow and Relationships:
+        
+        User Interaction: The browser detects user actions (e.g., clicking a button).
+        
+        Native Event: The browser triggers a native event via the DOM API.
+        
+        Browser API: The native event is handled using the Browser API (e.g., addEventListener).
+        
+        React Synthetic Event:
+                If you're using React, the native event is intercepted and wrapped in a SyntheticEvent.
+                
+                React processes the event and executes the associated handler.
+
+
+
+
+
+
+
+
+************
+Comprehensive Use Case
+
+        Scenario: User clicks a button to fetch data.
+
+            1.Native DOM Example:
+
+                const button = document.querySelector("button");
+                button.addEventListener("click", () => {
+                fetch("https://api.example.com/data")
+                    .then((response) => response.json())
+                    .then((data) => console.log("Fetched data:", data));
+                });
+            
+
+            2.React Example:
+
+                import { useState } from "react";
+
+                    function FetchDataButton() {
+                    const [data, setData] = useState(null);
+
+                    const handleClick = () => {
+                        fetch("https://api.example.com/data")
+                        .then((response) => response.json())
+                        .then((data) => setData(data));
+                    };
+
+                    return (
+                        <div>
+                        <button onClick={handleClick}>Fetch Data</button>
+                        {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+                        </div>
+                    );
+                    }
+
+
+
+
+
+
+
+        Workflow:
+            User Action: The user clicks the button.
+            
+            Native Event: A native click event is generated.
+            
+            DOM API: The browser handles the click using the DOM API.
+            
+            Synthetic Event in React:
+                    React captures the native event.
+                    
+                    Wraps it in a SyntheticEvent.
+                    
+                    Executes the onClick handler.
+            Browser API:
+                The handler uses the Fetch API to request data.

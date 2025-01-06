@@ -1,0 +1,91 @@
+
+The browser’s default event system is the built-in mechanism provided by browsers to handle user interactions and other events (e.g., clicking a button, pressing a key, resizing the window). It is based on the DOM Event Model, which defines how events are generated, dispatched, and handled in the browser.
+
+
+Key Concepts of the Browser’s Default Event System
+
+        1. Events:
+            Definition: Notifications that something has happened in the DOM (e.g., click, keydown, mouseover).
+            Types of Events:
+                Mouse Events: click, dblclick, mousedown, mouseup, mousemove.
+                
+                Keyboard Events: keydown, keypress, keyup.
+                
+                UI Events: resize, scroll, error.
+                
+                Form Events: submit, change, focus, blur.
+        
+
+        2. Event Listeners
+                A function that waits for an event to occur and executes a callback when the event happens.
+                
+                Added using addEventListener.
+
+                    Ex:     const button = document.querySelector("button");
+                            button.addEventListener("click", () => {
+                            console.log("Button clicked!");
+                            });
+
+
+
+        3. Event Flow
+            The browser follows a specific flow to dispatch events, defined in three phases:
+
+                1.Capture Phase:
+
+                        The event starts from the root of the DOM and traverses down to the target element.
+                        
+                        Allows listeners to intercept the event before it reaches the target.
+                        
+                        Enabled by setting the capture parameter in addEventListener.
+                        
+                            element.addEventListener("click", callback, true); // Capture phase
+                
+                
+                2.Target Phase:
+
+                    The event reaches the target element.
+                
+                    The listener on the target element executes.
+                
+                
+                3.Bubble Phase:
+
+                    The event bubbles back up from the target element to the root.
+                    
+                    Listeners set without the capture flag execute during this phase.
+              
+                        element.addEventListener("click", callback); // Bubble phase
+            
+        
+
+        4. Event Object
+            
+            Represents details about the event (type, target, timestamp).
+            
+            Example:
+           
+                    const button = document.querySelector("button");
+                    button.addEventListener("click", (event) => {
+                    console.log(event.type); // "click"
+                    console.log(event.target); // The button element
+                    });
+
+        
+
+
+        5. Event Delegation
+                A technique where a single event listener is attached to a parent element to handle events from its child elements.
+                
+                Leverages event bubbling.
+
+            Example:
+       
+                        const container = document.querySelector("#parent");
+                        container.addEventListener("click", (event) => {
+                        if (event.target.tagName === "BUTTON") {
+                            console.log("Button clicked:", event.target.textContent);
+                        }
+                        }); 
+
+

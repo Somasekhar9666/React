@@ -1,0 +1,74 @@
+Q.
+async function fetchData() {
+    try {
+      const response = await fetch(
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4287518&lng=78.3254948&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const jsonData = await response.json(); // Parse the JSON response
+      console.log("Fetched data:", jsonData); // Log the data for debugging
+      const restaurants = jsonData?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
+      setResList(restaurants); // Update the state with the fetched data
+    } catch (error) {
+      console.error("Error fetching data:", error); // Handle errors
+    }
+  }
+
+
+when i first used this snippet i got error called "CROS request blocked " , what is this error , later i installed cros extension ,what exactly this error  and how the extestion solved it .
+
+
+Solution:
+        The CORS error ("Cross-Origin Resource Sharing request blocked") occurs when a web application(my App.js) running in a browser tries to access resources from a different domain, protocol, or port than its own, and the server does not explicitly allow such cross-origin requests. Here's a comprehensive breakdown of this issue and how the extension you used "solved" it:
+        
+            *What is CORS?
+                    Definition: Cross-Origin Resource Sharing (CORS) is a security feature implemented by web browsers to restrict how resources on a web page can be requested from another domain.
+                    
+                    Purpose: It prevents malicious websites from accessing sensitive data from other domains (e.g., cookies, tokens) without permission.
+            
+
+
+
+            *Q.Why Was the Request Blocked?
+
+                    -->Same-Origin Policy:
+                        Browsers enforce the Same-Origin Policy, which restricts how a website can fetch resources (like API calls) from a different domain.
+                    
+                    *Example:
+                            Your frontend is hosted at http://localhost:3000.
+                            
+                            The API you're calling is hosted at https://www.swiggy.com.
+                            
+                            Since these are different origins (different domain, protocol), the browser checks if the server allows cross-origin requests.
+
+
+                    CORS Headers:
+                            For a cross-origin request to succeed, the server must send specific CORS headers (like Access-Control-Allow-Origin) in its response to explicitly allow requests from your frontend's origin.
+                            
+                            If the server doesn't send the appropriate CORS headers, the browser blocks the request.
+
+            
+
+                    *In Your Case:
+
+                            The API at https://www.swiggy.com likely does not allow cross-origin requests from your local development server (http://localhost), so the browser blocked the request.
+
+            
+
+
+
+            *Q.How the CORS Extension "Solved" It
+                The CORS browser extension works by disabling or bypassing the browser's CORS policy for your local environment. Here's how:
+
+                    1.Bypassing Browser Security:
+                        The extension modifies the browser's behavior to ignore CORS restrictions, allowing your frontend to make requests to any API, regardless of whether the server allows it or not.
+                    
+                    2.Fake CORS Headers:
+                        Some extensions inject fake Access-Control-Allow-Origin: * headers into the response, tricking the browser into thinking the server supports cross-origin requests.
+                    
+                    3.Why It Works:
+                        The extension operates entirely on the client side (within your browser) and does not affect the actual server or other users. It overrides the browser's security measures only for your specific instance.

@@ -1,0 +1,115 @@
+
+
+JSON (JavaScript Object Notation) is a lightweight data format(structure) used for storing and exchanging data between a server and a client. It is easy to read and write for humans and easy to parse and generate for machines.
+
+
+Key Characteristics:
+        Text-based format
+        
+        Derived from JavaScript but is language-independent
+        
+        Represents data as key-value pairs
+
+
+What is a JSON Structure?
+        A JSON structure is composed of the following basic elements:
+
+                1.Objects:
+                    Represented by {} (curly braces).
+                    
+                    Contain key-value pairs, where keys are strings and values can be any valid JSON type.
+                
+
+                    Ex: {
+                        "name": "Alice",
+                        "age": 25
+                        }
+                
+
+                2.Arrays:
+                        Represented by [] (square brackets).
+                        
+                        Contain a list of values, separated by commas.
+
+                    Ex:
+
+                        {
+                        "names": ["Alice", "Bob", "Charlie"]
+                            }
+                
+
+
+                3.Values:
+
+                    Can be:
+                        Strings (enclosed in quotes)
+                        
+                        Numbers
+                        
+                        Booleans (true or false)
+                        
+                        null
+                        
+                        Another object or array
+                    
+                    Ex:
+
+                        {
+                        "status": true,
+                        "count": 10,
+                        "meta": null
+                        }
+
+
+Q.What Was Used Before JSON?
+            XML (Extensible Markup Language):
+
+                    XML was widely used before JSON for data exchange.
+                    
+                    Example of XML:
+                    
+                            <person>
+                            <name>Alice</name>
+                            <age>25</age>
+                            </person>
+                
+
+        Problems with XML:
+
+            Verbose and harder to read
+            
+            Requires closing tags
+            
+            More complex to parse compared to JSON
+
+
+
+
+Q.What Problem Does JSON Solve?
+        Simplicity:
+            JSON is much simpler and more lightweight compared to XML.
+            
+            Easy to read for humans and easy to parse by machines.
+        
+        Interoperability:
+            JSON is language-independent, making it a universal data format for APIs and web applications.
+        
+        Speed:
+            JSON parsing is faster than XML parsing in most cases.
+        
+        Readability:
+            JSON's structure is straightforward, making it easier for developers to understand.
+
+
+
+Q.What Does JSON Contain?
+        Key-Value Pairs:
+            Keys must be strings.
+            
+            Values can be strings, numbers, booleans, arrays, objects, or null.
+        
+        
+        Nested Structures:
+            JSON can contain objects within objects or arrays within arrays.
+
+

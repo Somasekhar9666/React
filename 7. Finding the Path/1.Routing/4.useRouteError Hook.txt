@@ -1,0 +1,64 @@
+
+
+
+"The useRouteError hook is a feature provided by React Router that allows you to handle and display errors that occur during navigation or data loading in your app. It retrieves the error object associated with a specific route, making it easy to display meaningful error messages."
+
+
+
+
+
+
+
+
+Key Features of useRouteError:
+                                It is designed to be used in an Error Boundary Route (a route that catches and handles errors).
+                                
+                                It retrieves the error object thrown during:
+                                                                            Route rendering.
+                                                                            
+                                                                            Data loading (via loader in React Router).
+                                                                            
+                                                                            Fetching data with React Router loaders or actions.
+
+
+
+
+
+
+When Should You Use useRouteError?
+            You should use useRouteError when you want to:
+
+                                                            1.Handle Errors Gracefully: Display custom error messages for specific routes or during navigation failures.
+                                                            
+                                                            2.Differentiate Errors: Provide detailed feedback about the cause of the error (e.g., network issues, invalid data, or unauthorized access).
+                                                            
+                                                            3.Simplify Error Handling: Avoid writing global error handling logic and instead handle errors on a per-route basis.
+
+
+
+
+
+
+Syntax
+
+            const error = useRouteError();
+            
+                *error: The Object returned by useRouteError contains the error message or data thrown by a route's loader or action.
+
+
+
+
+                                import {useRouteError} from "react-router-dom";
+
+                                const Error=()=>{
+                                    const err=useRouteError();
+
+                                    render(
+
+                                        <h1>Opps Error! something wentwrong </h1>
+                                        <h3>{err.status} : { err.statusText}</h3>
+                                    )
+
+                                }
+
+                                export default Error

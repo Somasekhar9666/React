@@ -1,0 +1,103 @@
+1. What is routing in the general world?
+    "Routing refers to the process of determining the path or direction data, objects, or entities should take to reach their destination."
+        
+        Example: When you want to send a letter, the postal service determines the route it should take to reach its recipient. Similarly, in networking, routing decides how data packets travel from one device to another.
+
+
+
+
+2. What is the main purpose of routing?
+    The main purpose of routing is to direct something to its correct destination efficiently and accurately. This ensures that:
+            
+            Data or traffic takes the best possible path.
+            
+            The system avoids unnecessary delays or errors.
+
+
+
+
+3. Why is it called routing?
+    The term routing comes from the word "route," which means a path or direction. Routing describes the process of establishing and managing routes for movement.
+
+
+
+
+
+
+4. What is a router?
+        A router is a device, system, or tool used to facilitate routing. It ensures that the entity (data, traffic, or a user request) is sent to its correct destination.
+       
+        Example:
+                In networking: A hardware device that forwards data packets between computer networks.
+                
+                In postal systems: The sorting mechanism that assigns letters to their respective delivery paths.
+
+
+
+
+5. What is the main purpose of a router?
+            A router ensures that data or traffic is directed to the right location, using the most efficient path available.
+            
+            Example: 
+                    In the internet world, routers determine the shortest and fastest path for data packets to travel.
+
+
+    
+
+
+6. Why is it called a router?
+                            
+                            A router is named after its role in establishing "routes" for movement or communication.
+
+
+
+
+
+
+7. What is a router in UI (User Interface)?
+                        In UI, a router is a mechanism that manages navigation between different parts (pages or views) of an application.
+                        
+                        Example: 
+                                In a web application, a router determines what content or page should be displayed when a user clicks a link or enters a specific URL.
+
+
+
+
+
+
+8. What is the main purpose of a router in UI?
+
+            The primary purpose is to:
+                                    Enable navigation between different parts of the app without refreshing the entire page.
+                                    
+                                    Handle user interactions like clicking links or buttons to display the corresponding content.
+                                    
+                                    Maintain a seamless experience by updating only parts of the UI while keeping the application state intact.
+
+
+
+
+
+9. How can React achieve routing?
+                            React achieves routing using libraries like React Router, which provides tools and components to manage navigation in React applications. It allows developers to:
+
+                                    Map URLs to specific components.
+                                    
+                                    Create dynamic and nested routes.
+                                    
+                                    Handle route parameters and queries.
+                                    
+                                    Navigate programmatically.
+
+
+
+
+
+
+
+
+How Routing works Really ? 
+
+                    ""React renders components whenever the URL changes. It observes these URL changes with the help of the browser's History API. Whenever the URL changes, the browser's history stack is updated, and React Router listens to these changes. Based on the updated URL, React Router matches the route and renders the corresponding component to update the UI dynamically."
+
+                            **************Please Refer imageS P1 AND P2

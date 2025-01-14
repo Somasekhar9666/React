@@ -101,3 +101,7 @@ How Routing works Really ?
                     ""React renders components whenever the URL changes. It observes these URL changes with the help of the browser's History API. Whenever the URL changes, the browser's history stack is updated, and React Router listens to these changes. Based on the updated URL, React Router matches the route and renders the corresponding component to update the UI dynamically."
 
                             **************Please Refer imageS P1 AND P2
+
+
+
+                        *Note: Because it uses pushState and popstate  to move back and forwards SESSIONS, when ever it is navigation happens it only Rendered not Reloaded for every time . this is the best part of the Routing. 

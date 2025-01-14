@@ -284,3 +284,27 @@ export default Body
                                                 
                                                         *Since the array is empty, the effect does not depend on anything, so it behaves like componentDidMount
 
+
+
+
+
+
+Note:
+            useEffect({
+                fetchMenu();
+            }, []);
+
+        
+The above snippet throws error. 
+
+*Why the {} in useEffect Causes Issues:
+
+                The {} is interpreted as an object literal. The code inside the curly braces (fetchMenu();) is treated as a statement inside an object definition, not a function body. This results in a syntax error because an object literal cannot be executed as a function.
+
+                so always becareful when you pass arrow  function to useeffect,  not object literal
+
+
+                so:
+                        useEffect(() => {
+                        fetchMenu();                    // Arrow function with block statement
+                        }, []);

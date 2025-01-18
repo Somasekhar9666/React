@@ -1,0 +1,59 @@
+As we know we use Super keyword to call constructor of a parent class constructor so that all the properties and methods in parent class are intiallized fully. 
+
+import React from "react";
+
+class BasicClass extends React.Component {
+
+    constructor(props){
+        super(props);
+    }
+
+    render() {                                                                                                
+        return (
+            <div>
+                <h1>{this}</h1>
+                <h1>Tokyo</h1>
+                <h1>None</h1>
+            </div>  
+        );
+    }
+}
+
+export default BasicClass;
+
+
+
+Why is it necessary to use super(props) in React?
+    The React.Component class (parent class) has its own constructor that handles setting up props and other internal mechanisms. If you don't call super(props), your component will not inherit the necessary functionality from React.Component, and you will not be able to access this.props or other inherited methods (like this.setState()).
+
+
+
+The concept of needing to call the parent class constructor before using this is specific to JavaScript's class-based inheritance and its implementation of the constructor function. However, the general idea that child classes need to initialize the parent class before using its properties or methods is aligned with Object-Oriented Programming (OOP) principles.
+
+In many OOP languages, when a subclass inherits from a superclass, the subclass needs to initialize the superclass (either implicitly or explicitly) before accessing its properties or methods.
+
+In JavaScript, the this keyword refers to the instance of the class, and it cannot be used properly in the child class until the parent class is initialized using super(). This is a language-specific implementation in JavaScript's class-based inheritance, not a universal OOP principle.
+
+In other languages, like Python or Java, the superclass is typically initialized in the constructor of the subclass, and the behavior is quite similar: you need to call the parent class constructor to ensure the parent class is properly initialized and accessible. But the specific syntax and rules may vary across languages.
+
+
+
+
+Q."In JavaScript, the this keyword refers to the instance of the class, and it cannot be used properly in the child class until the parent class is initialized using super(). " 
+
+you are saying that properly not usable , but not entirely saying entirely right ,  which means we can use , but not at fully level , is it correct ?
+
+Yes, you're correct!
+
+In JavaScript, you can technically use this in the child class without calling super(), but it won't be properly initialized or functional until you call super(). The this keyword refers to the instance of the class, but in the child class, if you try to use this without calling the parent class's constructor (super()), the properties or methods from the parent class (which should be initialized via the parent constructor) will not be available or properly set up.
+
+
+
+To clarify:
+        Before calling super(): You can access this, but you cannot use the inherited properties or methods from the parent class because the parent class's constructor has not been called yet.
+        
+        After calling super(): The parent class is fully initialized, and this can now be used to access both the child class's and parent class's properties and methods properly.
+        
+        So, while this can technically be used before calling super(), it won't fully work as expected because the parent class's constructor hasn't run, and the inherited properties or methods won't be available.
+
+        This is why calling super() is necessary for proper functionality in the child class.

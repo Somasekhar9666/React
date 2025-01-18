@@ -1,0 +1,180 @@
+---->Object-Oriented Programming (OOP) in the context of memory management
+
+
+Key Concepts in OOP Memory Management
+        1.Classes and Objects:
+                                A class is a blueprint that defines properties (fields) and methods (behavior) but does not allocate memory by itself.
+                                
+                                An object is an instance of a class, and it occupies memory. When a class is instantiated, memory is allocated to store the object’s properties and link its methods.
+                    
+        
+        
+        2.Memory Areas:
+                        Heap: Stores objects and dynamic memory allocations. Each object created with new (or similar) is stored here.
+                        
+                        Stack: Stores function calls and local variables, including references to objects stored in the heap.
+                        
+                        Method Area: Stores the class metadata (e.g., method definitions and static fields).
+        
+        
+        
+        3.Object Structure in Memory:
+                                    Instance Variables: Stored in the heap as part of the object.
+                                    
+                                    Methods: Not copied into each object. Instead, a pointer in the object links to the class’s method definitions stored in the method area.
+                                    
+        
+        4.Inheritance and super:
+                                When a class inherits from another, the child object contains:
+                                
+                                The child class’s properties and methods.
+                                
+                                A reference to the parent class’s properties and methods.
+                                
+                                The super keyword ensures that the parent’s constructor is executed, initializing the inherited properties.
+        
+        
+        5.this Keyword:
+                        "this" is a reference to the current object in memory. It provides access to the object’s properties and methods.
+                        
+                        "this" is initialized during object creation and points to the memory location where the object resides.
+
+
+
+
+
+
+How Properties and Methods Are Stored
+                                        1.Class Metadata:
+                                                        *Stored in a shared memory area.
+                                                        
+                                                        Contains:
+                                                                Method definitions.
+                                                                Information about instance variables.
+                                                    
+                                                                Relationships (e.g., parent class).
+                                        
+                                        2.Object in Heap:
+                                                        For each object:
+                                                                        Memory is allocated for instance variables.
+                                                                        
+                                                                        "A hidden pointer links the object to the class metadata for methods."
+                                        
+                                        3.Method Calls:
+                                                         When a method is called on an object, the this pointer is implicitly passed to the method, enabling it to access the object’s memory.
+
+
+
+Step-by-Step Process
+Example Code:
+                class Parent:
+                        def __init__(self, name):
+                                self.name = name  # Instance variable
+
+                        def greet(self):
+                                return f"Hello, I am {self.name}."
+
+
+                class Child(Parent):
+                        def __init__(self, name, age):
+                                super().__init__(name)  # Call parent constructor
+                                self.age = age  # Additional instance variable
+
+                        def greet(self):
+                                return f"{super().greet()} I am {self.age} years old."
+
+
+
+                # Object creation
+                child = Child("Madara", 30)
+                print(child.greet())
+
+
+
+
+Memory-Level Breakdown
+                        1.Class Definition:
+                                        *When the Parent class is defined:
+                                                Its metadata (e.g., __init__ and greet) is stored in the method area.
+                                        
+                                        *When the Child class is defined:
+                                                Its metadata (e.g., __init__ and greet) is also stored in the method area.
+                                                
+                                                A link to Parent’s metadata is established.
+
+                        
+                        2.Object Creation:
+                                        When child = Child("Madara", 30) is executed:
+                                                        *Memory is allocated in the heap for the Child object.
+                                                
+                                                        The Child object contains:
+                                                                                A reference to the class metadata (for accessing methods).
+                                                                                
+                                                                                Space for instance variables (name and age).
+
+                        
+
+                        3.Calling super():
+                                        The super().__init__(name) call:
+                                                        Executes the parent constructor (Parent.__init__).
+                                                        
+                                                        Initializes the name property in the Child object.
+                        
+
+
+                        4.Accessing Methods:
+                                        *When child.greet() is called:
+                                                The "this pointer" (implicit in Python as self) refers to the Child object in the heap.
+                                                
+                                                The method lookup starts in the Child class’s metadata.
+                                                
+                                                If not found, it checks the Parent class.
+
+
+
+
+Key Relationships:
+                1."this" and Memory:
+                                *this holds the memory address of the current object.
+                                
+                                It is passed to instance methods, allowing them to operate on the object’s data.
+                
+                
+                2.super and Memory:
+                                super provides a direct link to the parent class’s methods and constructor.
+                                
+                                **Ensures that the parent’s "initialization" logic is executed.
+
+
+
+Analogy:
+        Imagine a Library System:
+                                Classes: Blueprints for library sections (e.g., Science, Fiction).
+                                
+                                Objects: Actual shelves in the library, each storing specific books.
+                                
+                                Heap: The physical storage space for all shelves.
+                                
+                                Stack: The librarian’s clipboard (temporary references to shelves).
+                                
+                                this: The librarian pointing to a specific shelf they are currently managing.
+                                
+                                super: The librarian referencing the main catalog (parent blueprint) to restock or verify books.
+
+
+
+
+
+
+
+
+
+
+***"Final Take aways: 
+                        1.this keyword is like a pointer, which acts as a Reference to your object that is stored in Memory.
+
+                        2.Extends or Inheritance , it  will only establishes the Inheritance connection , still you can  access and use the parent class properties and methods  but  they are no use , because they are not fully Intialized. 
+
+                        3.super method helps to access and use the parent class properties and method fully functionally, without this no use of Inheritance 
+
+

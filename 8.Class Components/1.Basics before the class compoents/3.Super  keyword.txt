@@ -1,0 +1,276 @@
+
+
+extends keyword: This establishes the inheritance, meaning the child class has access to the parent class's properties and methods. But without calling the parent class's constructor (via super()), the properties and methods aren't set up properly.
+
+super(): This calls the parent class's constructor and ensures that the child class gets its properties and methods, and if there are any initializations in the parent class's constructor, they are properly handled.
+
+
+How they work together:
+                        The extends keyword allows the child class to inherit from the parent class.
+                        
+                        The super() keyword calls the parent class's constructor to initialize the parent class and make sure its properties are properly set up.
+
+            
+
+            Ex:
+            class Parent:
+                def __init__(self, name):
+                    self.name = name  # Initialize name in the parent class
+
+                def say(self):
+                    print(f"saying {self.name}")
+
+
+            class Child(Parent):
+                def __init__(self, name, age):  # Accept both name and age
+                    super().__init__(name)      # Pass name to the parent class constructor
+                    self.age = age              # Initialize age in the child class
+
+                def say_age(self):
+                    print(f"saying age {self.age}")
+
+
+            # Create an instance of the Child class
+            varun = Child(name="varun", age=21)
+
+            # Call methods
+            varun.say()         # Output: saying varun
+            varun.say_age()     # Output: saying age 21
+
+
+In this example:
+        The extends keyword allows Child to inherit from Parent.
+        
+        The super(name) in the child class calls the constructor of the Parent class to ensure the name property is initialized properly.
+
+
+So, in summary:
+            *extends establishes inheritance.
+            
+            *super() ensures the parent class constructor is called and initializes properties properly. Without super(), the child class cannot access this or the properties/methods of the parent class.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+q.class Parent:
+    def __init__(self, name):
+        self.name = name  # Instance variable
+
+    def greet(self):
+        return f"Hello, I am {self.name}."
+
+In this function does the greet fucntion should take self as paramter inorder to use the name ?
+
+Why is self required?
+    In Python, self represents the instance of the class. When you call a method on an instance (e.g., parent.greet()), Python automatically passes the instance itself as the first argument to the method. This allows the method to access the instance's attributes and other methods.
+
+
+
+
+How it works:
+            self.name: The name attribute is stored in the instance (not in the method). To access it, the method must refer to self.
+            
+            Without self: The method wouldn't know which instance's name attribute it should access.
+
+
+
+Ex:
+        class paren:
+            def __init__(self, name):
+                self.name=name 
+                
+            def say(slef):
+                print(f"saying {self.name}")
+                
+
+
+        class child(paren):
+            def __init__(self,name,age):
+                super().__init__(name)
+                self.age=age
+            
+            
+            def say_age(self):
+                print(f"saying age{self.age}")
+
+        varun =child(name="varun",age=21)
+
+        print(varun.__dict__)
+
+        varun.say_age()
+        varun.say()
+
+
+
+Output:    {'name': 'varun', 'age': 21}
+                saying age21
+                saying varun
+
+
+
+
+
+What happens if self is not included?
+
+Ex: class paren:
+    def __init__(self, name):
+        self.name=name 
+        
+    def say():
+        print(f"saying {self.name}")
+        
+
+
+    class child(paren):
+        def __init__(self,name,age):
+            super().__init__(name)
+            self.age=age
+        
+        
+        def say_age(self):
+            print(f"saying age{self.age}")
+         
+    varun =child(name="varun",age=21)
+
+    print(varun.__dict__)
+
+    varun.say_age()
+    varun.say()
+
+
+Output:   {'name': 'varun', 'age': 21}
+            saying age21
+            ERROR!
+            Traceback (most recent call last):
+            File "<main.py>", line 28, in <module>
+            TypeError: paren.say() takes 0 positional arguments but 1 was given
+
+            === Code Exited With Errors ===
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**Q.
+class Parent:
+    def __init__(self, name):
+        self.name = name  # Parent initializes this property
+
+    def greet(self):
+        print(f"Hello, I am {self.name}.")
+
+class Child(Parent):
+    def __init__(self, name, age):  # Accept both name and age
+        super().__init__(name)      # Initialize parent properties
+        self.age = age              # Initialize child-specific property
+
+    def say_age(self):
+        print(f"I am {self.age} years old.")
+
+child = Child("Bob", 21)
+child.greet()      # Output: Hello, I am Bob.
+child.say_age()    # Output: I am 21 years old.
+
+
+class Child(Parent):
+    def __init__(self, name, age):
+
+
+the parent has name paramter , so i can not pass direlcty like this :
+class child(paren):
+    def __init__(self,age):
+        super().__init__()
+        self.age=age
+    
+    def say_age(self):
+         print(f"saying age{self.age}")
+         
+varun =child(name="varun",age=21) 
+
+
+Does i need to handle in child class constuctuer and then i need to pass it to parent ? 
+
+
+
+Yes, if the parent class has required parameters (like name in the example), the child class constructor must handle those parameters and explicitly pass them to the parent class constructor using super().__init__().
+
+Here’s why:
+            The parent class has its own properties (name), which it initializes using its constructor.
+            
+            If the child class constructor doesn't handle and pass the required arguments, the parent class won’t know how to initialize its properties, resulting in an error.
+
+
+
+Why You Can't Skip Handling Parent Parameters:
+
+                        If you try something like this:
+
+                                class Child(Parent):
+                                        def __init__(self, age):
+                                            super().__init__()  # Missing required `name` parameter
+                                            self.age = age
+
+                                        def say_age(self):
+                                            print(f"I am {self.age} years old.")
+
+                                    # Attempting to create an instance will raise an error
+                                    varun = Child(age=21)  # This will fail
+
+
+                        You'll get an error like:
+                                                    TypeError: __init__() missing 1 required positional argument: 'name'
+                            
+                            This happens because the parent class Parent requires name in its constructor, and the child class does not provide it.
+
+                
+
+
+            Summary
+                    1.Parent parameters must be handled explicitly in the child class constructor.
+                    
+                    2.The child constructor should:
+                                                    Accept the required parameters for the parent.
+                                                    
+                                                    Pass them to the parent using super().__init__().
+                                                    
+                                                    Handle any child-specific parameters.
+                    
+                    This ensures that both the parent and child properties are initialized correctly.

@@ -1,0 +1,225 @@
+What Are Custom Hooks in React?
+        Custom Hooks in React are JavaScript functions that allow you to extract and reuse logic across multiple components. They enable you to encapsulate stateful logic or other reusable logic into a single, easily shareable function.
+
+
+
+Main Purpose of Custom Hooks:
+                            1.Reusability: Avoid duplicating logic across components.
+                            
+                            2.Clean Code: Encapsulate complex logic into readable and maintainable functions.
+                            
+                            3.Abstraction: Hide implementation details from components.
+                            
+                            4.Composition: Combine multiple pieces of functionality within a component.
+
+
+
+
+
+Basic Syntax of a Custom Hook:
+                            A custom hook:
+                                            1.Is a function prefixed with use (e.g., useCustomHook).
+                                            
+                                            2.Can use React hooks like useState, useEffect, or others inside it.
+                                            
+                                            3.Returns data or methods to be used in components.
+
+                                    
+
+                                    Ex:
+                                        import { useState, useEffect } from 'react';
+
+                                        function useCustomHook() {
+                                            const [value, setValue] = useState(null);
+
+                                            useEffect(() => {
+                                                // Some effect logic
+                                                console.log("Effect logic in custom hook");
+                                            }, []);
+
+                                            return [value, setValue];
+                                        }
+
+
+
+
+
+
+
+
+
+Example 1: Basic Custom Hook (Fetching Data):
+                                                import { useState, useEffect } from 'react';
+
+                                                function useFetch(url) {
+                                                    const [data, setData] = useState(null);
+                                                    const [loading, setLoading] = useState(true);
+                                                    const [error, setError] = useState(null);
+
+                                                    useEffect(() => {
+                                                        async function fetchData() {
+                                                            try {
+                                                                const response = await fetch(url);
+                                                                const result = await response.json();
+                                                                setData(result);
+                                                            } catch (err) {
+                                                                setError(err);
+                                                            } finally {
+                                                                setLoading(false);
+                                                            }
+                                                        }
+                                                        fetchData();
+                                                    }, [url]);
+
+                                                    return { data, loading, error };
+                                                }
+
+
+
+
+
+
+                                        --->    // Component using the hook
+                                                function App() {
+                                                    const { data, loading, error } = useFetch('https://jsonplaceholder.typicode.com/posts');
+
+                                                    if (loading) return <p>Loading...</p>;
+                                                    if (error) return <p>Error: {error.message}</p>;
+
+                                                    return (
+                                                        <ul>
+                                                            {data.map((post) => (
+                                                                <li key={post.id}>{post.title}</li>
+                                                            ))}
+                                                        </ul>
+                                                    );
+                                                }
+
+                                                export default App;
+
+
+                                            
+                                
+
+
+
+
+Example 2: Intermediate Custom Hook (Window Dimensions):
+                                                        import { useState, useEffect } from 'react';
+
+                                                        function useWindowSize() {
+                                                            const [windowSize, setWindowSize] = useState({
+                                                                width: window.innerWidth,
+                                                                height: window.innerHeight,
+                                                            });
+
+                                                            useEffect(() => {
+                                                                function handleResize() {
+                                                                    setWindowSize({
+                                                                        width: window.innerWidth,
+                                                                        height: window.innerHeight,
+                                                                    });
+                                                                }
+
+                                                                window.addEventListener('resize', handleResize);
+                                                                return () => window.removeEventListener('resize', handleResize); // Cleanup
+                                                            }, []);
+
+                                                            return windowSize;
+                                                        }
+
+
+
+
+
+                                                        // Component using the hook
+                                                        function WindowSizeComponent() {
+                                                            const { width, height } = useWindowSize();
+
+                                                            return (
+                                                                <p>
+                                                                    Window size: {width} x {height}
+                                                                </p>
+                                                            );
+                                                        }
+
+                                                        export default WindowSizeComponent;
+
+
+
+
+
+
+
+
+
+Example 3: Advanced Custom Hook (Form Handling):
+                                                    import { useState } from 'react';
+
+                                                    function useForm(initialValues) {
+                                                        const [values, setValues] = useState(initialValues);
+
+                                                        const handleChange = (event) => {
+                                                            const { name, value } = event.target;
+                                                            setValues({ ...values, [name]: value });
+                                                        };
+
+                                                        const resetForm = () => setValues(initialValues);
+
+                                                        return { values, handleChange, resetForm };
+                                                    }
+
+
+
+
+
+
+
+
+
+
+                                                    // Component using the hook
+                                                    function FormComponent() {
+                                                        const { values, handleChange, resetForm } = useForm({ username: '', email: '' });
+
+                                                        const handleSubmit = (e) => {
+                                                            e.preventDefault();
+                                                            console.log(values);
+                                                            resetForm();
+                                                        };
+
+                                                        return (
+                                                            <form onSubmit={handleSubmit}>
+                                                                <input
+                                                                    type="text"
+                                                                    name="username"
+                                                                    value={values.username}
+                                                                    onChange={handleChange}
+                                                                    placeholder="Username"
+                                                                />
+                                                                <input
+                                                                    type="email"
+                                                                    name="email"
+                                                                    value={values.email}
+                                                                    onChange={handleChange}
+                                                                    placeholder="Email"
+                                                                />
+                                                                <button type="submit">Submit</button>
+                                                            </form>
+                                                        );
+                                                    }
+
+                                                    export default FormComponent;
+
+
+
+
+
+Key Best Practices for Custom Hooks:
+                                       1.Start with use: React requires hooks to be prefixed with use to enforce rules of hooks.
+                                        
+                                        2.Isolate Logic: Keep custom hooks focused on a single responsibility.
+                                        
+                                        3.Leverage Built-in Hooks: Use React’s built-in hooks like useState, useEffect, and useRef inside custom hooks.
+                                    
+                                    By building custom hooks, you improve the reusability and maintainability of your code while adhering to React's functional programming principles.

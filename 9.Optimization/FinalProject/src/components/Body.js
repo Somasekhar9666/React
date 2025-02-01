@@ -2,6 +2,10 @@ import ResturantCard from "./ResturantCard";
 import Shimmer from "./Shimmer";
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
+import useOnlineStatus from "../utils/useOnlineStatus";
+
+
+
 const Body = () => {
   const [resList, setResList] = useState([]); // Complete list of restaurants-------------> Original 
   const [filteredRestaurants, setFilteredRestaurants] = useState([]); // Filtered restaurants -------> Copy for Opeartions 
@@ -30,11 +34,23 @@ const Body = () => {
     }
   }
 
+
+
+  const onlineStatus=useOnlineStatus();
+
+  if (onlineStatus===false) return <h1>Plase Check Internet Connection</h1>
+
+
   if (resList.length === 0) {
     return <Shimmer />;               // Conditional Rendering untill Fetch gets the Data on Intiall rendering
   }
 
+
+
+
+
   return (
+
     <div className="body">
       <div className="filter-btn">
         <button
@@ -83,7 +99,12 @@ const Body = () => {
         ))}
       </div>
     </div>
+
+
   );
+
+
+
 };
 
 export default Body;

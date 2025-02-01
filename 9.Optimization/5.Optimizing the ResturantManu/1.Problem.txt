@@ -1,0 +1,14 @@
+the restuarnt menu card that we have is handling two tasks:
+        1. it feches the data from the api
+        2. it displays the data 
+
+
+Don't you think that it is doing overwork ?
+
+Acc to the SRM principle a Compoent or a task should have only one Responsibility.
+
+so we have to handle the data fetching in one component and displaying it in another component 
+
+so how to do that ? 
+    
+ with help of cutom hooks we can keep two functionoloties in two diffrent components

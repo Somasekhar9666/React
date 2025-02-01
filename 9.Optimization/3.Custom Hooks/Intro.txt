@@ -223,3 +223,12 @@ Key Best Practices for Custom Hooks:
                                         3.Leverage Built-in Hooks: Use React’s built-in hooks like useState, useEffect, and useRef inside custom hooks.
                                     
                                     By building custom hooks, you improve the reusability and maintainability of your code while adhering to React's functional programming principles.
+
+
+
+
+
+
+
+Q.*****is it mandatory to keep "use" keyword before your hook ? 
+        No it is not mandatory , but the project uses any Linter that is configured with react , it will defenatly throw the error , so react library developrs always recommds you to  use "use" kewyword.

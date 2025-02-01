@@ -1,0 +1,15 @@
+The Major task of any build tool is "Bundling" . it will take all the files  , bundles (Combines) them into single JS file called as "index.js" . P1
+
+this is the file that being sent to the user when he makes the request . 
+
+A Project may contain huge number of compoents like 1000 and so.  
+
+*when you try to generate  the Production build for your app , the size of the index.js will be huge . which will create a problem .
+
+so its better to keep in mind or take care when you are developing a huge scale application. 
+
+* if you don't care about the size , it will take lot of time when it is rendered . 
+
+
+
+So the soluton for this problem is "Chunking" or "Logical Bundling"  Code spliting   or Dynmic Bundling  or  Lazy loading   or   On Demand loading .....

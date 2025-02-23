@@ -1,0 +1,164 @@
+Higher-Order Functions (HOF) in JavaScript
+    What are Higher-Order Functions?
+        A Higher-Order Function (HOF) is a function that:
+
+            1.Takes another function as an argument (callback function).
+           
+            2.Returns another function as its output.
+
+
+
+
+Why Are They Called "Higher-Order" Functions?
+    The term "higher-order" comes from mathematics and functional programming. It means a function operates(do operations) on another function by taking it as an argument or returning it. Since they deal with functions as values, they are at a higher level of abstraction.
+
+
+
+
+
+**How Do Higher-Order Functions Work?
+    *JavaScript treats functions as first-class citizens, meaning:
+
+                1.Functions can be assigned to variables.
+                            // Assigning a function to a variable
+                                const greet = function() {
+                                    console.log("Hello, world!");
+                                };
+
+                                greet();
+
+                2.Functions can be passed as arguments to other functions.
+                            // Function that accepts another function as an argument
+                                function process(action) {
+                                    action();  // Calling the passed function
+                                }
+
+                                // Defining a function to pass
+                                function sayHi() {
+                                    console.log("Hi there!");
+                                }
+
+                                // Passing 'sayHi' function as an argument
+                                process(sayHi);  // Output: Hi there!
+
+
+                
+                3.Functions can be returned from other functions.
+                            // Function that returns another function
+                                function createMultiplier(factor) {
+                                    return function(number) {
+                                        return number * factor;
+                                    };
+                                }
+
+                                // Creating a multiplier function
+                                const double = createMultiplier(2);
+                                console.log(double(5));  // Output: 10
+
+                                const triple = createMultiplier(3);
+                                console.log(triple(4));  // Output: 12
+
+                            Here, createMultiplier(2) returns a function that multiplies a number by 2. The returned function is assigned to double, which we can call later.
+
+
+    Since functions in JavaScript behave like regular values, we can pass and return them in functions, making HOFs possible.
+
+
+
+
+
+
+
+
+
+
+
+
+
+*Built-in HOFs in JavaScript (map, filter, reduce):
+    Example 1: Using map
+
+        const numbers = [1, 2, 3, 4];
+        const squared = numbers.map(num => num * num);
+        console.log(squared); // Output: [1, 4, 9, 16]
+
+    🔹 map is a higher-order function because it takes a function as an argument and applies it to each element.
+
+
+    Example 2: Using filter
+
+        const ages = [10, 25, 30, 15, 18];
+        const adults = ages.filter(age => age >= 18);
+        console.log(adults); // Output: [25, 30, 18]
+
+    🔹 filter is a higher-order function because it filters elements based on a function.
+
+
+    Example 3: Using reduce
+
+        const numbers = [1, 2, 3, 4];
+        const sum = numbers.reduce((acc, num) => acc + num, 0);
+        console.log(sum); // Output: 10
+
+    🔹 reduce is a higher-order function because it applies a function to reduce the array to a single value.
+
+
+
+
+Why Were Higher-Order Functions Introduced in JavaScript?
+            1.Code Reusability → You can pass functions instead of writing duplicate code.
+            
+            2.Better Abstraction → They provide a clean and concise way to work with data.
+            
+            3.Functional Programming → JavaScript supports functional programming concepts.
+            
+            4.More Readable Code → Makes operations like mapping, filtering, and reducing very expressive.
+            
+            5.Asynchronous Operations → Callbacks and Promises use HOFs for handling async operations.
+
+
+
+
+
+
+*Do Higher-Order Functions Exist in Other Languages?
+    Yes! HOFs exist in many languages that support first-class functions:
+    
+        1.Python
+
+            def apply_operation(x, func):
+                return func(x)
+
+            def square(n):
+                return n * n
+
+            print(apply_operation(5, square))  # Output: 25
+
+
+        
+        2.Java (Using Functional Interfaces)
+
+            import java.util.function.Function;
+
+            public class Main {
+                public static void main(String[] args) {
+                    Function<Integer, Integer> square = x -> x * x;
+                    System.out.println(square.apply(5)); // Output: 25
+                }
+            }
+    
+
+
+
+
+Final Thoughts
+            HOFs make code more reusable, readable, and maintainable.
+            
+            JavaScript uses HOFs extensively in functional programming and asynchronous operations (callbacks, promises).
+            
+            HOFs exist in many languages that support first-class functions.
+        
+
+
+
+<svg width="33" height="12" viewBox="0 0 33 12" fill="none" xmlns="http://www.w3.org/2000/svg" data-testid="swiggy-one-restaurant-card-tag-plus-logo"><path d="M3.67254 6.47237C3.67254 5.58851 4.1007 4.87334 4.87278 4.65725L3.41426 3.30916L4.69322 1.44385C1.72094 1.74219 0 3.95741 0 6.47237C0 8.72245 1.37427 10.7495 3.78994 11.3685L4.78576 8.28192C4.06755 8.03795 3.67254 7.3395 3.67254 6.47237Z" fill="url(#paint0_linear_18993_67592)"></path><path d="M7.1045 6.47468C7.1045 7.5565 6.48988 8.37763 5.37803 8.37763C4.78965 8.37763 4.34491 8.13366 4.05625 7.74192L0.430664 8.55886C1.18479 10.2945 2.90435 11.5632 5.37941 11.5632C8.79368 11.5632 10.7784 9.17784 10.7784 6.47329C10.7784 3.76873 8.79368 1.40433 5.37941 1.40433C5.33532 1.40433 5.29231 1.40706 5.24937 1.40979C5.2237 1.41142 5.19807 1.41305 5.17224 1.41409L5.10318 0.430176L2.87414 3.31651L5.55206 5.79051V4.60101C5.56305 4.60239 5.57439 4.60275 5.58556 4.60309C5.59684 4.60344 5.60794 4.60379 5.61836 4.60519C6.57827 4.71532 7.1045 5.49184 7.1045 6.47468Z" fill="white"></path><path d="M17.9923 11.3233V5.97271C17.9923 4.97036 17.4564 4.58977 16.6028 4.58977C15.7893 4.58977 15.3722 5.01078 15.0739 5.35094V11.3219H11.5008V1.64542H15.0739V2.74676C15.6291 2.10548 16.6815 1.40424 18.3693 1.40424C20.593 1.40424 21.5654 2.76628 21.5654 4.45035V11.3233H17.9923Z" fill="white"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M22.2655 6.47456C22.2655 3.66962 24.3898 1.4056 27.4864 1.4056C30.3053 1.4056 32.4696 3.44935 32.4696 6.85514V7.59681H25.9588C26.1577 8.21858 26.8524 8.81943 28.0236 8.81943C28.5595 8.81943 29.7501 8.55874 30.2266 8.13772L31.6962 10.3613C30.7432 11.1824 29.036 11.563 27.6065 11.563C24.608 11.563 22.2655 9.66008 22.2655 6.47456ZM27.4864 4.14919C26.3952 4.14919 26.0375 4.86994 25.9187 5.31187H29.0747C28.9753 4.89086 28.6383 4.14919 27.4864 4.14919Z" fill="white"></path><defs><linearGradient id="paint0_linear_18993_67592" x1="3.15987" y1="1.3627" x2="2.31698" y2="7.65772" gradientUnits="userSpaceOnUse"><stop stop-color="white" stop-opacity="0"></stop><stop offset="1" stop-color="white"></stop></linearGradient></defs></svg>

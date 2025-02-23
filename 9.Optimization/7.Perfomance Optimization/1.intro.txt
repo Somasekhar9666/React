@@ -13,3 +13,8 @@ so its better to keep in mind or take care when you are developing a huge scale 
 
 
 So the soluton for this problem is "Chunking" or "Logical Bundling"  Code spliting   or Dynmic Bundling  or  Lazy loading   or   On Demand loading .....
+
+
+
+
+""""""" """""""""""""""""""""""""""CHECK out 9.1 """""""""""""""
